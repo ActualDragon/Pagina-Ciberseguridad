@@ -115,30 +115,30 @@ class FireBaseManager():
             followers.append(followerDict)
         if len(followers)==0: return False
         return followers
-    def actualizarEspecializacion(self, id, especializacion):
-        medicoRef=self.firestoreManager.collection(u'personal médico').document(id)
+    '''def actualizarEspecializacion(self, id, especializacion):
+        usuarioRef=self.firestoreManager.collection(u'usuarios').document(id)
         field_updates = {"especializacion": especializacion}
-        medicoRef.update(field_updates)
+        usuarioRef.update(field_updates)
         
     def actualizarInstitucion(self, id, institucion, paisInstitucion, estadoInstitucion):
-        medicoRef=self.firestoreManager.collection(u'personal médico').document(id)
+        usuarioRef=self.firestoreManager.collection(u'usuarios').document(id)
         field_updates = {"institucion": institucion,"paisInstitucion":paisInstitucion, "estadoInstitucion":estadoInstitucion}
-        medicoRef.update(field_updates)
-
-    def modificarPaciente(self, id, idPaciente, peso, estatura, diagnostico):
-        medicoRef=self.firestoreManager.collection(u'personal médico').document(id).collection("pacientes")
-        query = medicoRef.where(u'idNum', u'==', int(idPaciente)).get()
-        field_updates = {"peso": peso,"estatura":estatura, "diagnostico":diagnostico}
-        for paciente in query:
+        usuarioRef.update(field_updates)
+    '''
+    def modificarTweet(self, id, idTweet, nuevoTweet):
+        tweetsRef=self.firestoreManager.collection(u'usuarios').document(id).collection("tweets")
+        query = tweetsRef.where(u'idNum', u'==', int(idTweet)).get()
+        field_updates = {"contenido":nuevoTweet, "fecha":""}
+        for tweet in query:
             
-            doc = medicoRef.document(paciente.id)
+            doc = tweetsRef.document(tweet.id)
             doc.update(field_updates)
             return True
         return False
+    '''
     def insertParams(self, params):
-        print("\n\nPARAMS\n\n",params,file=stderr)
         self.firestoreManager.collection(u'parametros').document().set(params)
     def downloadMovementFile(self,filename):
         store = storage.bucket()
         blob = store.blob("json/PruebaMovimiento/"+filename)
-        blob.download_to_filename("app/static/files/"+filename)
+        blob.download_to_filename(filename)'''
