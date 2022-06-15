@@ -1,0 +1,19 @@
+{
+    "tweets": [
+        {
+            "username": "Elon123",
+            "tweet": "Avoid the great filters!",
+            "id": 1
+        },
+        {
+            "username": "Leeex",
+            "tweet": "The world is love.",
+            "id": 2
+        },
+        {
+            "username": "POTUS",
+            "tweet": "A lot of progress with Japan.",
+            "id": 3
+        }
+    ]
+}
