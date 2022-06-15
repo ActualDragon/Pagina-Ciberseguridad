@@ -115,30 +115,15 @@ class FireBaseManager():
             followers.append(followerDict)
         if len(followers)==0: return False
         return followers
-    '''def actualizarEspecializacion(self, id, especializacion):
-        usuarioRef=self.firestoreManager.collection(u'usuarios').document(id)
-        field_updates = {"especializacion": especializacion}
-        usuarioRef.update(field_updates)
-        
-    def actualizarInstitucion(self, id, institucion, paisInstitucion, estadoInstitucion):
-        usuarioRef=self.firestoreManager.collection(u'usuarios').document(id)
-        field_updates = {"institucion": institucion,"paisInstitucion":paisInstitucion, "estadoInstitucion":estadoInstitucion}
-        usuarioRef.update(field_updates)
-    '''
+    
     def modificarTweet(self, id, idTweet, nuevoTweet):
         tweetsRef=self.firestoreManager.collection(u'usuarios').document(id).collection("tweets")
         query = tweetsRef.where(u'idNum', u'==', int(idTweet)).get()
         field_updates = {"contenido":nuevoTweet, "fecha":""}
         for tweet in query:
-            
+              
             doc = tweetsRef.document(tweet.id)
             doc.update(field_updates)
             return True
         return False
-    '''
-    def insertParams(self, params):
-        self.firestoreManager.collection(u'parametros').document().set(params)
-    def downloadMovementFile(self,filename):
-        store = storage.bucket()
-        blob = store.blob("json/PruebaMovimiento/"+filename)
-        blob.download_to_filename(filename)'''
+ 
