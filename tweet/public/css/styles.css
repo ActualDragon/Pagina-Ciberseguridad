@@ -1,0 +1,26 @@
+.tweet-button {
+    padding: 7px;
+    background-color: #0bc;
+    color: white;
+    border: white;
+    border-radius: 30%;
+}
+
+.tweet-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.tweet-header {
+    padding: 5px;
+}
+
+.tweet-anchor {
+    padding: 15px;
+    text-align: center;
+    background-color: #0bc;
+    color: white;
+    border: white;
+    border-radius: 50%;
+    text-decoration: none;
+}
