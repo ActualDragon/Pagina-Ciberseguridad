@@ -6,21 +6,22 @@ import time, threading
 
 class User:
     correo=""
-    nombreCompleto=""
+    nombre=""
     id=""
+    username=""
+    
     idToken=""
     refreshToken=""
     expirySeconds=0
     sessionStartTime=0
-    authManager=""
-    def __init__(self, email, nombre, id, idToken, refreshToken, expirySeconds, authManager):
+    def __init__(self, email, nombre, id, username,idToken, refreshToken, expirySeconds):
         self.correo=email
-        self.nombreCompleto=nombre
+        self.nombre=nombre
         self.id=id
+        self.username=username
         self.idToken=idToken
         self.refreshToken=refreshToken
         self.expirySeconds=expirySeconds
-        self.authManager=authManager
         self.sessionStartTime=time.time()
     def checkSession(self):
         currTime=time.time()
