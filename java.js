@@ -12,7 +12,8 @@ var tweet = ["hola", "hola", "hola", "hola", "hola", "hola", "hola", "hola", "ho
 //Función que imporime los tweets
 window.onload = function() {
     for(i=0;i<10;i++) {
-        var post = "<div><h6 class=\"text-body\">";
+        var post = "<div class=\"d-flex p-3 border-bottom\"><img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp\" class=\"rounded-circle\" height=\"50\" loading=\"lazy\"/></div>";
+        post += "<div><h6 class=\"text-body\">";
         post += screenname[i];
         post += "</h6><span class=\"small text-muted font-weight-normal\"> • </span><span class=\"small text-muted font-weight-normal\">";
         post += username[i];
