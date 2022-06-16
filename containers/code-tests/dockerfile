@@ -7,3 +7,7 @@ RUN python -m pip install \
     flake8 \
     black
 WORKDIR /data
+COPY .pre-commit-config.yaml /data
+RUN git init \
+    && git add .pre-commit-config.yaml \
+    && pre-commit run --all-files
