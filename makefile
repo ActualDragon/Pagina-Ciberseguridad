@@ -1,6 +1,9 @@
 help:   ## show this message
 	cmd/show-help makefile
 
+build:   ## start app building first
+	docker-compose up -d --build
+
 start:   ## start app
 	docker-compose up -d
 
