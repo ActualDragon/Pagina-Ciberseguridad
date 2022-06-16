@@ -37,19 +37,25 @@ class FireBaseManager():
         except Exception as e:
             print("ERROR LOGIN\n\n:", str(e), file=stderr)
             return False
-    def registraUsuario(self, nombre, mail, password, fecha, especializacion, institucion, pais, estado):
+    def registraUsuario(self, nombre, mail, password, username):
         auth = self.pyrebaseManager.auth()
+        existeUsuario=self.getUsuarioByUsername(username)
+        if existeUsuario: 
+            print("ERROR REGISTRO, ya existe este usuario.\n\n:", str(e), file=stderr)
+            return False
         try:
             user=auth.create_user_with_email_and_password(mail, password)
+            auth.send_email_verification(user['idToken'])
             id=user["localId"]
             newValues={
-                "nombreCompleto":nombre,
+                "nombre":nombre,
                 "email":mail,
                 "UID":id,
-                "fechaNacimiento":fecha,
+                "usuario":username,
+                "tweets":[]
             }
             self.firestoreManager.collection(u'usuarios').document(id).set(newValues)
-            myUser=User.User(mail,nombre,id,"a","a",1000,self)
+            myUser=User.User(mail,nombre,id,username, user["idToken"], user["refreshToken"], 3000)
             print("USER:\n\n", myUser.correo, file=stderr)
             return myUser
         except Exception as e:
@@ -59,6 +65,12 @@ class FireBaseManager():
     def getUsuarioByID(self, idUsuario):
         usuariosRef=self.firestoreManager.collection(u'usuarios')
         query = usuariosRef.where(u'UID', u'==', idUsuario).get()
+        if len(query)==0: return False
+        usuario=query[0].to_dict()
+        return usuario
+    def getUsuarioByUsername(self, username):
+        usuariosRef=self.firestoreManager.collection(u'usuarios')
+        query = usuariosRef.where(u'usuario', u'==', username).get()
         if len(query)==0: return False
         usuario=query[0].to_dict()
         return usuario
