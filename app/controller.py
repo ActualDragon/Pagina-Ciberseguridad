@@ -14,21 +14,24 @@ def registrar():
     return render_template("registro.html")
 @app.route('/registraUsuario', methods=["POST"])
 def registraUsuario():
+    #Instanciamos modelo login que sirve para login y registro
     model=login_model.login_model()
+    #Obtenemos la información enviada por POST
+    #de nuestra form. Se maneja como un diccionario 
+    #e.g data["nombre"]
     data=request.form
+    #Obtenemos campos de este diccionario
     nombre=data["nombre"]
-    fecha=data["fecha"]
-    especializacion=data["especializacion"]
-    institucion=data["institucion"]
-    pais=data["pais"]
-    estado=data["estado"]
-    user=data["email"]
+    correo=data["correo"]
     password=data["password"]
-    doesUserExist=model.registerUser(nombre,user, password, fecha, especializacion, institucion, pais, estado)
-    if doesUserExist:
-        data={"success":"true",
+    confirmaPassword=data["confirmaPassword"]
+    
+    registroExitoso=model.registerUser(nombre,correo, password, confirmaPassword)
+    if registroExitoso:
+        '''data={"success":"true",
         "usuario":session.get("correo")}
-        return redirect(url_for("main"))
+        return redirect(url_for("registrar"))'''
+        return render_template("registro.html", confirmMsg="Revisa tu correo para confirmarlo, y después podrás hacer login.")
     else:
         redirect(url_for('registrar'))
         return render_template("registro.html", errorMsg="Error: registrando usuario.")
