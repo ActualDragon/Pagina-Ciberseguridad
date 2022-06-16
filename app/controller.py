@@ -1,6 +1,6 @@
 import sys
 
-from flask import redirect, render_template, request, session, url_for
+from flask import jsonify, redirect, render_template, request, session, url_for
 
 from app import app
 from app.models import login_model
@@ -43,7 +43,7 @@ def registraUsuario():
         return redirect(url_for("registrar"))"""
         return render_template(
             "registro.html",
-            confirmMsg="Revisa tu correo para confirmarlo, y después podrás hacer login.",  # noqa: E501
+            confirmMsg="Revisa tu correo para confirmarlo, y después podrás hacer login.",
         )
     else:
         redirect(url_for("registrar"))

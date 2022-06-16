@@ -2,7 +2,7 @@ from sys import stderr
 
 import firebase_admin
 import pyrebase
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials, firestore, storage
 
 from app.classes import User
 
@@ -20,7 +20,7 @@ class FireBaseManager:
         config = {
             "apiKey": "AIzaSyAryxJPGDbzH8PmZKITRgB9y5wQWw69cNw",
             "authDomain": "seguridadproyecto-2a366.firebaseapp.com",
-            "databaseURL": "https://seguridadproyecto-2a366-default-rtdb.firebaseio.com/",  # noqa: E501
+            "databaseURL": "https://seguridadproyecto-2a366-default-rtdb.firebaseio.com/",
             "storageBucket": "seguridadproyecto-2a366.appspot.com",
             "serviceAccount": "credentials.json",
         }
@@ -38,7 +38,7 @@ class FireBaseManager:
             info = auth.get_account_info(user["idToken"])
             info = info["users"][0]
             print("INFO:", info, "\n\n\n", file=stderr)
-            if not info["emailVerified"]:
+            if info["emailVerified"] == False:
                 msg = "Usuario no verificado"
                 print(msg, "\n\n\n", file=stderr)
                 return False
@@ -62,7 +62,7 @@ class FireBaseManager:
         auth = self.pyrebaseManager.auth()
         existeUsuario = self.getUsuarioByUsername(username)
         if existeUsuario:
-            print("ERROR REGISTRO, ya existe este usuario.\n\n:", username, file=stderr)
+            print("ERROR REGISTRO, ya existe este usuario.\n\n:", str(e), file=stderr)
             return False
         try:
             user = auth.create_user_with_email_and_password(mail, password)

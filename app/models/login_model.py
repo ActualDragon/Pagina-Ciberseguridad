@@ -1,6 +1,10 @@
-from flask import session
+from hashlib import new
+from pickle import TRUE
+
+from flask import Flask, session
 
 from app import app
+from app.classes import User
 
 
 class login_model:

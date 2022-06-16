@@ -1,6 +1,7 @@
 import secrets
+from re import template
 
-from flask import Flask
+from flask import Flask, session
 from flask.sessions import SecureCookieSessionInterface
 from flask_session.__init__ import Session
 
@@ -16,3 +17,4 @@ app.session_cookie = SecureCookieSessionInterface().get_signing_serializer(app)
 # Setupeamos nuesttro manejador de la bdd
 
 app.firebaseManager = FireBaseManager.FireBaseManager()
+from app import controller
