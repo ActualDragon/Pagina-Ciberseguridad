@@ -30,8 +30,12 @@ class FireBaseManager():
         auth = self.pyrebaseManager.auth()
         try:
             user=auth.sign_in_with_email_and_password(mail, password)
+            info=auth.get_account_info(user['idToken'])
+            print(info,"\n\n\n", file=stderr)
+            if not info["verified"]:
+                return False
             nombre=self.getUsuarioByID(user["localId"])["nombreCompleto"]
-            myUser=User.User(user["email"],nombre,user["localId"],user["idToken"],user["refreshToken"],int(user["expiresIn"]),self)
+            myUser=User.User(user["email"],nombre,user["localId"],user["usuario"],user["idToken"],user["refreshToken"],int(user["expiresIn"]))
             print("USER:\n\n", myUser.correo, file=stderr)
             return myUser
         except Exception as e:
