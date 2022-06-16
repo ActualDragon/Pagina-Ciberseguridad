@@ -1,5 +1,5 @@
 help:   ## show this message
-	cmd/show-help makefile | sort -V
+	@cmd/show-help makefile | sort -V
 
 build:   ## start app building first
 	docker-compose up -d --build
