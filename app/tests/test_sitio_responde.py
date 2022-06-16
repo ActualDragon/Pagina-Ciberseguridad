@@ -4,6 +4,7 @@ import requests
 
 
 # All functions with test_ prefix will run in testing.
+@pytest.mark.skip(reason="Not implemented")
 def test_site_localhost():
     # assert verifies if the test was successful or not.
     port = 5050
