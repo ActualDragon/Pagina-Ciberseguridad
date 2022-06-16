@@ -6,3 +6,16 @@ test-job:
   stage: build
   script:
     - echo "Esta es la primera prueba."
+
+docker-master-build:
+  # Instalar Docker dentro de Docker (Docker IN Docker = dind)
+  services: 
+    - docker:dind
+
+  # La imagen de docker contiene todo lo que necesitamos para conectarse al docker daemon
+  # es decir, permite correr todos los comandos de docker.
+  image: docker:latest
+  stage: build
+  before_script:
+    # Hacemos login a docker de forma segura con ayuda del pipe.
+    - echo "$CI_REGISTRY_PASSWORD" | docker login "$CI_REGISTRY" -u "$CI_REGISTRY_USER" -p
