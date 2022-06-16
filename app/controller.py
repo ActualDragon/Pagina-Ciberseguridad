@@ -21,6 +21,7 @@ def registraUsuario():
     #e.g data["nombre"]
     data=request.form
     #Obtenemos campos de este diccionario
+    print(data, "\n\n\n", file=sys.stderr)
     nombre=data["nombre"]
     correo=data["correo"]
     password=data["password"]

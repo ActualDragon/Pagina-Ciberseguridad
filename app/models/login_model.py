@@ -13,7 +13,7 @@ class login_model:
             return True
         else:
             return False
-    def registerUser(nombre,correo, password, confirmaPassword, username):
+    def registerUser(self, nombre,correo, password, confirmaPassword, username):
         if password!=confirmaPassword:
             return False
         user=app.firebaseManager.registraUsuario(nombre, correo, password, username)
