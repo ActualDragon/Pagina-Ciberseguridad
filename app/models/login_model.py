@@ -6,7 +6,7 @@ from flask import Flask, session
 from app import app
 class login_model:
     def loginUser(self, username, password):
-        user=app.firebaseManager.loginMedico(username, password)
+        user=app.firebaseManager.loginUsuario(username, password)
         if user:
             app.loggedUser=user
             self.startSession(user)
