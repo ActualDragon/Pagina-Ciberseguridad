@@ -2,3 +2,8 @@ lint:
   image: registry.gitlab.com/cs-2022-2/proyecto/pre-commit:latest
   script:
     - pre-commit run --all-files
+  only:
+    - merge_requests
+  except:
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "main"
