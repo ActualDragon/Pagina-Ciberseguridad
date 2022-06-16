@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous">
+    </script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Javascript -->
+    <script type="text/javascript" src=java.js></script>
+    
+    <title>Feed</title>
+  </head>
+  
+  <body>
+    <div class="card" style="width: 48rem">
+        <div class="border border-left border-right px-0">
+          <div class="p-3 border-bottom">
+            <h4 class="d-flex align-items-center mb-0">
+              Home <i class="far fa-xs fa-star ms-auto text-primary"></i>
+            </h4>
+          </div>
+          <div>
+            <div class="card shadow-0">
+              <div class="card-body border-bottom pb-2">
+                <div class="d-flex">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp" class="rounded-circle"
+                    height="50" alt="Avatar" loading="lazy" />
+                  <div class="d-flex align-items-center w-100 ps-3">
+                    <div class="w-100">
+                      <input type="text" id="form143" class="form-control form-status border-0 py-1 px-0"
+                        placeholder="What's happening" />
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <ul class="list-unstyled d-flex flex-row ps-3 pt-3" style="margin-left: 50px;">
+                    <li>
+                      <a href=""><i class="far fa-image pe-2"></i></a>
+                    </li>
+                    <li>
+                      <a href=""><i class="fas fa-photo-video px-2"></i></a>
+                    </li>
+                    <li>
+                      <a href=""><i class="fas fa-chart-bar px-2"></i></a>
+                    </li>
+                    <li>
+                      <a href=""><i class="far fa-smile px-2"></i></a>
+                    </li>
+                    <li>
+                      <a href=""><i class="far fa-calendar-check px-2"></i></a>
+                    </li>
+                  </ul>
+                  <div class="d-flex align-items-center">
+                    <button type="button" class="btn btn-primary btn-rounded">Tweet</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="d-flex p-3 border-bottom">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
+                  height="50" alt="Avatar" loading="lazy" />
+                <div class="d-flex w-100 ps-3" id="div">
+                      <h6 class="text-body" id="ScreenName"></h6>
+                      <span class="small text-muted font-weight-normal"> • </span>
+                      <span class="small text-muted font-weight-normal" id="TimeStamp"></span>
+                      <span><i class="fas fa-angle-down float-end"></i></span>
+                      <span class="small text-muted font-weight-normal" id="UserName"></span>
+                    <p style="line-height: 1.2;" id="Tweet">
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+            <button type="button" id= "cargar" class="btn btn-primary btn-lg">Cargar más tweets</button>
+          </div>
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+      </script>
+      
+  </body>
+</html>
