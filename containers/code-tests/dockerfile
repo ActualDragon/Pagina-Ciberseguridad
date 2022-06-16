@@ -1,0 +1,9 @@
+FROM docker.io/python:3.10.5-slim-buster
+RUN apt update \
+    && apt-get install -y git \
+    && apt clean
+RUN python -m pip install \
+    pre-commit \
+    flake8 \
+    black
+WORKDIR /data

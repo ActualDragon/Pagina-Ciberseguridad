@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  chown:
+    image: docker.io/alpine
+    volumes:
+      - cache:/cache
+    command: chown -R 1000:1000 /cache
+  pre-commit:
+    image: registry.gitlab.com/cs-2022-2/proyecto/pre-commit
+    user: 1000:1000
+    build:
+      dockerfile: ./dockerfile
+      context: .
+    volumes:
+      - '../../:/data'
+      - cache:/.cache
+    command: pre-commit run --all files
+volumes:
+  cache:
