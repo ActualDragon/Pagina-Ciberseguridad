@@ -9,4 +9,7 @@ services:
       - '5050:80'
     volumes:
       - ./:/app
+      - sessions:/app/sessions
       - ./credentials.json:/credentials/credentials.json:ro
+volumes:
+  sessions:
