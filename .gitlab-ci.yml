@@ -1,0 +1,8 @@
+stages:
+  - build
+  - test
+
+test-job:
+  stage: build
+  script:
+    - echo "Esta es la primera prueba."
