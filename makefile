@@ -16,4 +16,8 @@ start:   ## start app
 stop:   ## stop app
 	docker-compose down
 
-.PHONY: help start stop
+test:	## generar ambiente de desarrollo
+	. .venv/bin/activate
+	pytest
+
+.PHONY: help start stop test
