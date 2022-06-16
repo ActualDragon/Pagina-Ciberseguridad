@@ -22,5 +22,6 @@ logs:   ## show app logs
 test:	## generar ambiente de desarrollo
 	. .venv/bin/activate
 	pytest
+	pre-commit run --all
 
 .PHONY: help start stop test
