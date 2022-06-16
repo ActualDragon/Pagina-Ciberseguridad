@@ -1,6 +1,9 @@
 # macOS generic files
 .DS_Store
 
+# Ignore file with credentials
+credentials.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
