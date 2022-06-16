@@ -24,6 +24,6 @@ class login_model:
 
     def startSession(self, user):
         session["id"]=user.id
-        session["nombre"]=user.nombreCompleto
+        session["nombre"]=user.nombre
         session["correo"]=user.correo
 
