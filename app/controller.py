@@ -40,7 +40,7 @@ def registraUsuario():
 def login():
     model=login_model.login_model()
     data=request.form
-    user=data["email"]
+    user=data["correo"]
     password=data["password"]
     doesUserExist=model.loginUser(user, password)
     if doesUserExist:
@@ -49,7 +49,7 @@ def login():
         return redirect(url_for("main"))
     else:
         redirect(url_for('index'))
-        return render_template("index.html", errorMsg="Error: combinación usuario/contraseña incorrecta.")
+        return render_template("index.html", errorMsg="Error: Error de Login.")
 @app.route('/main')
 def main():
     if session.get("id") is None:

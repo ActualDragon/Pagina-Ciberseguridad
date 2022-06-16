@@ -34,7 +34,7 @@ class FireBaseManager():
             print(info,"\n\n\n", file=stderr)
             if not info["verified"]:
                 return False
-            nombre=self.getUsuarioByID(user["localId"])["nombreCompleto"]
+            nombre=self.getUsuarioByID(user["localId"])["nombre"]
             myUser=User.User(user["email"],nombre,user["localId"],user["usuario"],user["idToken"],user["refreshToken"],int(user["expiresIn"]))
             print("USER:\n\n", myUser.correo, file=stderr)
             return myUser
