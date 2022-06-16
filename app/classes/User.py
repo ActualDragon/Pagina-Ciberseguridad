@@ -1,40 +1,43 @@
-from re import T
+import time
 from sys import stderr
-import time, threading
-
 
 
 class User:
-    correo=""
-    nombre=""
-    id=""
-    username=""
-    
-    idToken=""
-    refreshToken=""
-    expirySeconds=0
-    sessionStartTime=0
-    def __init__(self, email, nombre, id, username,idToken, refreshToken, expirySeconds):
-        self.correo=email
-        self.nombre=nombre
-        self.id=id
-        self.username=username
-        self.idToken=idToken
-        self.refreshToken=refreshToken
-        self.expirySeconds=expirySeconds
-        self.sessionStartTime=time.time()
+    correo = ""
+    nombre = ""
+    id = ""
+    username = ""
+
+    idToken = ""
+    refreshToken = ""
+    expirySeconds = 0
+    sessionStartTime = 0
+
+    def __init__(
+        self, email, nombre, id, username, idToken, refreshToken, expirySeconds
+    ):
+        self.correo = email
+        self.nombre = nombre
+        self.id = id
+        self.username = username
+        self.idToken = idToken
+        self.refreshToken = refreshToken
+        self.expirySeconds = expirySeconds
+        self.sessionStartTime = time.time()
+
     def checkSession(self):
-        currTime=time.time()
-        elapsed=currTime-self.sessionStartTime
-        if(elapsed>self.expirySeconds): self.refreshTokenFunc()
+        currTime = time.time()
+        elapsed = currTime - self.sessionStartTime
+        if elapsed > self.expirySeconds:
+            self.refreshTokenFunc()
+
     def logout(self):
         print("Logout", file=stderr)
 
-        
     def refreshTokenFunc(self):
         user = self.authManager.refreshToken(self.refreshToken)
         # now we have a fresh token{
-        user={"idToken":"a","refreshToken":"b"}
+        user = {"idToken": "a", "refreshToken": "b"}
 
-        self.idToken=user['idToken']
-        self.refreshToken=user['refreshToken']
+        self.idToken = user["idToken"]
+        self.refreshToken = user["refreshToken"]
