@@ -1,0 +1,15 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+<div class="container" style="padding: 20px; text-align: center;">
+    <h1>Create a tweet!</h1>
+    <form action="/tweets/new" , method="POST">
+        <input type="text" , name="username" , id="username" , placeholder="Username" style="margin: 3px;">
+        <br>
+        <label for="tweet">Write your tweet...</label>
+        <br>
+        <textarea name="tweet" id="tweet" cols="30" rows="10"></textarea>
+        <br>
+        <button class="tweet-button">Tweet!</button>
+    </form>
+</div>
+<%- include('../partials/footer') %>
