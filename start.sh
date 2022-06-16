@@ -1,6 +1,6 @@
 #!/bin/bash
-app="movementanalysis"
-container="movement_analysis"
+app="twitter"
+container="twitter"
 docker build --tag ${app} .
 docker container run --detach \
  --publish 5050:80 --name ${container} \
