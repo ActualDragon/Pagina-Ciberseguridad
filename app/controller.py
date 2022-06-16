@@ -25,8 +25,8 @@ def registraUsuario():
     correo=data["correo"]
     password=data["password"]
     confirmaPassword=data["confirmaPassword"]
-    
-    registroExitoso=model.registerUser(nombre,correo, password, confirmaPassword)
+    username=data["username"]
+    registroExitoso=model.registerUser(nombre,correo, password, confirmaPassword, username)
     if registroExitoso:
         '''data={"success":"true",
         "usuario":session.get("correo")}
