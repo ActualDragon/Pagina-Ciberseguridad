@@ -8,5 +8,5 @@ services:
     ports:
       - '5050:80'
     volumes:
-      - ./app:/app
+      - ./:/app
       - ./credentials.json:/credentials/credentials.json:ro
