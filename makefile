@@ -16,6 +16,9 @@ start:   ## start app
 stop:   ## stop app
 	docker-compose down
 
+logs:   ## show app logs
+	docker-compose logs -f
+
 test:	## generar ambiente de desarrollo
 	. .venv/bin/activate
 	pytest
