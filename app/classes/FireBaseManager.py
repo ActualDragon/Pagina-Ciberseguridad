@@ -31,11 +31,14 @@ class FireBaseManager():
         try:
             user=auth.sign_in_with_email_and_password(mail, password)
             info=auth.get_account_info(user['idToken'])
-            print(info,"\n\n\n", file=stderr)
-            if not info["verified"]:
+            info=info["users"][0]
+            print("INFO:",info,"\n\n\n", file=stderr)
+            if info["emailVerified"]==False:
+                msg="Usuario no verificado"
+                print(msg,"\n\n\n", file=stderr)
                 return False
-            nombre=self.getUsuarioByID(user["localId"])["nombre"]
-            myUser=User.User(user["email"],nombre,user["localId"],user["usuario"],user["idToken"],user["refreshToken"],int(user["expiresIn"]))
+            datosUsuario=self.getUsuarioByID(user["localId"])
+            myUser=User.User(user["email"],datosUsuario["nombre"],user["localId"],datosUsuario["usuario"],user["idToken"],user["refreshToken"],int(user["expiresIn"]))
             print("USER:\n\n", myUser.correo, file=stderr)
             return myUser
         except Exception as e:
