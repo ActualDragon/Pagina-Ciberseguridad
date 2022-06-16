@@ -7,4 +7,4 @@ import requests
 def test_site_localhost():
     # assert verifies if the test was successful or not.
     port = 5050
-    assert 200 == requests.get(f"https://localhost:{port}", timeout=1).status_code
+    assert 200 == requests.get(f"http://localhost:{port}", timeout=1).status_code
