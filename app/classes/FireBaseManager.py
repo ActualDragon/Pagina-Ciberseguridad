@@ -20,7 +20,8 @@ class FireBaseManager:
         config = {
             "apiKey": "AIzaSyAryxJPGDbzH8PmZKITRgB9y5wQWw69cNw",
             "authDomain": "seguridadproyecto-2a366.firebaseapp.com",
-            "databaseURL": "https://seguridadproyecto-2a366-default-rtdb.firebaseio.com/",
+            "databaseURL":
+            "https://seguridadproyecto-2a366-default-rtdb.firebaseio.com/",
             "storageBucket": "seguridadproyecto-2a366.appspot.com",
             "serviceAccount": "credentials.json",
         }
@@ -89,12 +90,6 @@ class FireBaseManager:
         if len(query) == 0:
             return False
         usuario = query[0].to_dict()
-        return usuario
-    def getUsuarioByUsername(self, username):
-        usuariosRef=self.firestoreManager.collection(u'usuarios')
-        query = usuariosRef.where(u'usuario', u'==', username).get()
-        if len(query)==0: return False
-        usuario=query[0].to_dict()
         return usuario
 
     def getUsuarios(self):

@@ -1,7 +1,6 @@
 
 from app import app
 from flask import session
-from app import app
 class login_model:
     def loginUser(self, username, password):
         user=app.firebaseManager.loginUsuario(username, password)

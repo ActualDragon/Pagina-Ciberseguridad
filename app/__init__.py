@@ -15,4 +15,4 @@ app.session_cookie = SecureCookieSessionInterface().get_signing_serializer(app)
 #Setupeamos nuestro manejador de la bdd
 
 app.firebaseManager = FireBaseManager.FireBaseManager()
-from app import controller  # noqa: F401, E402 Se necesita inicializar el controlador después de lo anterior.
+from app import controller  # noqa
