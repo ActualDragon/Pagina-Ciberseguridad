@@ -1,3 +1,8 @@
+stages:
+  - lint
+  - build
+  - test
+
 lint:
   image: registry.gitlab.com/cs-2022-2/proyecto/pre-commit:latest
   script:
@@ -7,3 +12,25 @@ lint:
   except:
     variables:
       - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "main"
+
+build-image:
+  stage: build
+  image: docker:20.10.16
+  variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_VERIFY: 1
+    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+
+  # Instalar Docker dentro de Docker (Docker IN Docker = dind)
+  services:
+    - docker:20.10.16-dind
+
+  before_script:
+    - docker info
+
+  script:
+    - echo docker build -t $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG containers/prod/compose.yml
+    - echo docker push $CI_REGISTRY/${CI_PROJECT_PATH}:${TAG}
+    - docker build -t $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG containers/prod/compose.yml
+    - docker push $CI_REGISTRY/${CI_PROJECT_PATH}:${TAG}
