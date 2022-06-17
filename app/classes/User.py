@@ -1,6 +1,5 @@
-from re import T
 from sys import stderr
-import time, threading
+import time
 
 
 

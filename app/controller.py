@@ -1,5 +1,5 @@
 from flask import render_template
-from flask import request, session, redirect, jsonify, url_for
+from flask import request, session, redirect, url_for
 from app import app
 from app.models import  login_model
 from app.views import index_view
@@ -32,7 +32,8 @@ def registraUsuario():
         '''data={"success":"true",
         "usuario":session.get("correo")}
         return redirect(url_for("registrar"))'''
-        return render_template("registro.html", confirmMsg="Revisa tu correo para confirmarlo, y después podrás hacer login.")
+        confirmMsg="Revisa tu correo para confirmarlo, y después podrás hacer login."
+        return render_template("registro.html", confirmMsg=confirmMsg)
     else:
         redirect(url_for('registrar'))
         return render_template("registro.html", errorMsg="Error: registrando usuario.")

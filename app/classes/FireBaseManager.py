@@ -33,12 +33,13 @@ class FireBaseManager():
             info=auth.get_account_info(user['idToken'])
             info=info["users"][0]
             print("INFO:",info,"\n\n\n", file=stderr)
-            if info["emailVerified"]==False:
+            if not info["emailVerified"]:
                 msg="Usuario no verificado"
                 print(msg,"\n\n\n", file=stderr)
                 return False
             datosUsuario=self.getUsuarioByID(user["localId"])
-            myUser=User.User(user["email"],datosUsuario["nombre"],user["localId"],datosUsuario["usuario"],user["idToken"],user["refreshToken"],int(user["expiresIn"]))
+            myUser=User.User(user["email"],datosUsuario["nombre"],user["localId"],datosUsuario["usuario"],
+            user["idToken"],user["refreshToken"],int(user["expiresIn"]))
             print("USER:\n\n", myUser.correo, file=stderr)
             return myUser
         except Exception as e:
@@ -48,7 +49,7 @@ class FireBaseManager():
         auth = self.pyrebaseManager.auth()
         existeUsuario=self.getUsuarioByUsername(username)
         if existeUsuario: 
-            print("ERROR REGISTRO, ya existe este usuario.\n\n:", str(e), file=stderr)
+            print("ERROR REGISTRO, ya existe este usuario.\n\n:", file=stderr)
             return False
         try:
             user=auth.create_user_with_email_and_password(mail, password)
