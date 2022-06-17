@@ -48,7 +48,7 @@ const sleep = async (milliseconds) => {
 window.onload = function() {
     for(i=0;i<10;i++) {
         // Validar que siga habiendo tweets
-        if (typeof TweetsRecibidos[i].screenname !== null) {
+        if (TweetsRecibidos[i].screenname !== null) {
             //En post se guardaa el HTML para el tweet, agregandole la información de la base de datos
             var post = "<h6 class=\"text-body\">";
             post += "<div class=\"p-3 border-bottom\">";
@@ -86,7 +86,8 @@ function ImprimeTweets(number) {
         await sleep(1000);
         for(i=number;(i<(number+10));i++) {
             // Validar que siga habiendo tweets
-            if (typeof TweetsRecibidos[i].screenname !== null) {
+            console.log(TweetsRecibidos[i].screenname);
+            if (!(jQuery.isEmptyObject(TweetsRecibidos[i].screenname))) {
                 //En post se guardaa el HTML para el tweet, agregandole la información de la base de datos
                 var post = "<h6 class=\"text-body\">";
                 post += "<div class=\"p-3 border-bottom\">";
