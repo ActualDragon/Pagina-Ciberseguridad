@@ -2,7 +2,7 @@
 .DS_Store
 
 # Ignore file with credentials
-credentials.json
+# credentials.json ## No longer needed because we use git-crypt
 
 flask_session
 .gitlab-ci-local
@@ -73,6 +73,7 @@ db.sqlite3-journal
 # Flask stuff:
 instance/
 .webassets-cache
+flask_session/
 
 # Scrapy stuff:
 .scrapy
