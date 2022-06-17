@@ -29,8 +29,12 @@ var Informacion= {
 
 miUsuario = Informacion.usuario;
 numeroTweets = Informacion.numTweets-1;
+number=0; //Variable que determina cuántos tweets se han impreso
 
-number=0; //Variable que permite cargar los siguientes 10 tweets
+//Función que imporime los primeros 10 tweets
+window.onload = function() {
+    ImprimeTweets(number);
+}
 
 //Función que permite tener un delay a la hora de cargar los tweets nuevos
 const sleep = async (milliseconds) => {
@@ -38,41 +42,6 @@ const sleep = async (milliseconds) => {
         return setTimeout(resolve, milliseconds)
     });
 };
-
-//Función que imporime los primeros 10 tweets
-window.onload = function() {
-    for(i=0;i<10;i++) {
-        // Validar que siga habiendo tweets
-        if (i<=numeroTweets) {
-            //En post se guardaa el HTML para el tweet, agregandole la información de la base de datos
-            var post = "<h6 class=\"text-body\">";
-            post += "<div class=\"p-3 border-bottom\">";
-            post += "<img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp\" class=\"rounded-circle\" height=\"50\" loading=\"lazy\"/>  ";
-            post += Informacion.TweetsRecibidos[i].screenname;
-            post += "<div style=\"display:inline\" class=\"small text-muted font-weight-normal\"> • </div>";
-            post += "<span class=\"small text-muted font-weight-normal\">";
-            post += Informacion.TweetsRecibidos[i].username;
-            post += "</span><span class=\"small text-muted font-weight-normal\">  ";
-            post += Informacion.TweetsRecibidos[i].timestamp;
-            post += "</span>";
-            //Menu para borrar, editar, etc., tus propios tweets
-            if(Informacion.TweetsRecibidos[i].username==miUsuario){
-                post += "<div class=\"dropdown\" style=\"display: inline-block\">";
-                post += "<button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" style=\"color: grey\"></button>";
-                post += "<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton1\">";
-                post += "<li><a class=\"dropdown-item\" href=\"#\">Borrar</a></li>";
-                post += "<li><a class=\"dropdown-item\" href=\"#\">Editar</a></li>";
-                post += "</ul></div>";
-            }
-            post += "</div></h6><p class=\"p-3 border-bottom border-dark\" style=\"line-height: 1.2;\">";
-            post += Informacion.TweetsRecibidos[i].tweet;
-            post += "</p>";
-            //El contenido de post se agrega como hijo de un div vacío
-            const div = document.getElementById('divprint');
-            div.insertAdjacentHTML('beforeend', post);
-        }
-    }
-}
 
 //Función que imprime los siguientes 10 tweets cuando se llega al final de la página
 function ImprimeTweets(number) {
