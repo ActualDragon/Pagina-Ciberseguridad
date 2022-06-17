@@ -1,14 +1,12 @@
 from flask import Flask
 from flask_session.__init__ import Session
 from flask.sessions import SecureCookieSessionInterface
+from flask_session.__init__ import Session
+
 from app.classes import FireBaseManager
-import secrets
 
-
-secret= secrets.token_urlsafe(16)
-app = Flask(__name__,
-            static_url_path='', 
-            static_folder='static')
+secret = secrets.token_urlsafe(16)
+app = Flask(__name__, static_url_path="", static_folder="static")
 app.secret_key = secret
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"

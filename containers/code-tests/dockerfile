@@ -1,0 +1,13 @@
+FROM docker.io/python:3.10.5-slim-buster
+RUN apt update \
+    && apt-get install -y git \
+    && apt clean
+RUN python -m pip install \
+    pre-commit \
+    flake8 \
+    black
+WORKDIR /data
+COPY .pre-commit-config.yaml /data
+RUN git init \
+    && git add .pre-commit-config.yaml \
+    && pre-commit run --all-files

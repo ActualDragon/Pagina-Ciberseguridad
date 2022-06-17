@@ -4,6 +4,9 @@
 # Ignore file with credentials
 credentials.json
 
+flask_session
+.gitlab-ci-local
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

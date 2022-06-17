@@ -11,6 +11,7 @@ class login_model:
             return True
         else:
             return False
+            
     def registerUser(self, nombre,correo, password, confirmaPassword, username):
         if password!=confirmaPassword:
             return False
