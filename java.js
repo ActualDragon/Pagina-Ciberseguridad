@@ -43,7 +43,7 @@ function ImprimeTweets(number) {
     const testSleep = async () => {
         await sleep(1000);
         for(i=number;(i<(number+10));i++) {
-            //Validar que siga habiendo tweets
+            // Validar que siga habiendo tweets
             if (typeof screenname[i] !== 'undefined') {
                 var post = "<h6 class=\"text-body\">";
                 post += "<div class=\"p-3 border-bottom\"><img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp\" class=\"rounded-circle\" height=\"50\" loading=\"lazy\"/>  ";
@@ -57,6 +57,11 @@ function ImprimeTweets(number) {
                 post += "</p>";
                 const div = document.getElementById('divprint');
                 div.insertAdjacentHTML('beforeend', post);
+            }
+            // Desactivar el botón si no hay más tweets por cargar
+            else {
+                document.getElementById("cargar").disabled = true;
+                document.getElementById("cargar").innerHTML = "Esperando tweets"; 
             }
         }
     }
