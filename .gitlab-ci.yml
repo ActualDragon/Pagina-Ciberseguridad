@@ -38,7 +38,7 @@ build-image:
         tag=":$CI_COMMIT_REF_SLUG"
         echo "Running on branch '$CI_COMMIT_BRANCH': tag = $tag"
       fi
-    - echo docker build -t $CI_REGISTRY/${CI_PROJECT_PATH}:$tag containers/prod/compose.yml
-    - echo docker push $CI_REGISTRY/${CI_PROJECT_PATH}:${tag}
-    - docker build -t $CI_REGISTRY/${CI_PROJECT_PATH}:$tag containers/prod/compose.yml
-    - docker push $CI_REGISTRY/${CI_PROJECT_PATH}:${tag}
+    - echo docker build -t $CI_REGISTRY/${CI_PROJECT_PATH}$tag containers/prod/compose.yml
+    - echo docker push $CI_REGISTRY/${CI_PROJECT_PATH}${tag}
+    - docker build -t $CI_REGISTRY/${CI_PROJECT_PATH}$tag containers/prod/compose.yml
+    - docker push $CI_REGISTRY/${CI_PROJECT_PATH}${tag}
