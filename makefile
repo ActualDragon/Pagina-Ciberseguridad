@@ -12,10 +12,10 @@ build:  ## build images
 	docker-compose -f containers/prod/compose.yml build
 
 dev:   ## start development app
-	docker-compose -f containers/dev/compose.yml up -d --build
+	docker-compose -f containers/dev/compose.yml up -d
 
 prod:   ## start staging environment
-	docker-compose -f containers/prod/compose.yml up -d --build
+	docker-compose -f containers/prod/compose.yml up -d
 
 stop:   ## stop app
 	docker-compose -f containers/dev/compose.yml down
