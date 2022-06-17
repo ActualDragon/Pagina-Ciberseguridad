@@ -3,8 +3,7 @@ from flask import request, session, redirect, url_for
 from app import app
 from app.models import login_model
 from app.views import index_view
-
-
+import sys
 @app.route("/")
 def index():
     view = index_view.index_view()
