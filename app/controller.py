@@ -1,9 +1,12 @@
-from flask import render_template
-from flask import request, session, redirect, url_for
+import sys
+
+from flask import redirect, render_template, request, session, url_for
+
 from app import app
 from app.models import login_model
 from app.views import index_view
-import sys
+
+
 @app.route("/")
 def index():
     view = index_view.index_view()
@@ -18,48 +21,54 @@ def registrar():
 
 @app.route("/registraUsuario", methods=["POST"])
 def registraUsuario():
-    #Instanciamos modelo login que sirve para login y registro
-    model=login_model.login_model()
-    #Obtenemos la información enviada por POST
-    #de nuestra form. Se maneja como un diccionario 
-    #e.g data["nombre"]
-    data=request.form
-    #Obtenemos campos de este diccionario
+    # Instanciamos modelo login que sirve para login y registro
+    model = login_model.login_model()
+    # Obtenemos la información enviada por POST
+    # de nuestra form. Se maneja como un diccionario
+    # e.g data["nombre"]
+    data = request.form
+    # Obtenemos campos de este diccionario
     print(data, "\n\n\n", file=sys.stderr)
-    nombre=data["nombre"]
-    correo=data["correo"]
-    password=data["password"]
-    confirmaPassword=data["confirmaPassword"]
-    username=data["username"]
-    registroExitoso=model.registerUser(nombre,correo, password, 
-    confirmaPassword, username)
+    nombre = data["nombre"]
+    correo = data["correo"]
+    password = data["password"]
+    confirmaPassword = data["confirmaPassword"]
+    username = data["username"]
+    registroExitoso = model.registerUser(
+        nombre, correo, password, confirmaPassword, username
+    )
     if registroExitoso:
         """data={"success":"true",
         "usuario":session.get("correo")}
         return redirect(url_for("registrar"))"""
         return render_template(
             "registro.html",
-            confirmMsg="Revisa tu correo para confirmarlo"+"y después podrás hacer login.", # noqa E501
+            confirmMsg="Revisa tu correo para confirmarlo"
+            + "y después podrás hacer login.",  # noqa E501
         )
     else:
         redirect(url_for("registrar"))
-        return render_template("registro.html", errorMsg="Error: registrando usuario.") # noqa E501
+        return render_template(
+            "registro.html", errorMsg="Error: registrando usuario."
+        )  # noqa E501
 
 
 @app.route("/login", methods=["POST"])
 def login():
-    model=login_model.login_model()
-    data=request.form
-    user=data["correo"]
-    password=data["password"]
-    doesUserExist=model.loginUser(user, password)
+    model = login_model.login_model()
+    data = request.form
+    user = data["correo"]
+    password = data["password"]
+    doesUserExist = model.loginUser(user, password)
     if doesUserExist:
         data = {"success": "true", "usuario": session.get("correo")}
         return redirect(url_for("main"))
     else:
-        redirect(url_for('index'))
+        redirect(url_for("index"))
         return render_template("index.html", errorMsg="Error: Error de Login.")
-@app.route('/main')
+
+
+@app.route("/main")
 def main():
     if session.get("id") is None:
         return redirect(url_for("index"))
