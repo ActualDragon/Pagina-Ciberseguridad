@@ -1,12 +1,13 @@
 //Arreglos temporales en lo que queda la base de datos
 var screenname = ["Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus",
                   "Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus", "Miley Cyrus"];
-var username = ["@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus",
-                "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus final"];
+var username = ["@hannamontana", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus",
+                "@hannamontana", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus", "@mileycyrus final"];
 var timestamp = ["2h", "2h", "2h", "2h", "2h", "2h", "2h", "2h", "2h", "2h",
                  "2h", "2h", "2h", "2h", "2h", "2h", "2h", "2h", "2h", "2h"];
 var tweet = ["hola", "hola", "hola", "hola", "hola", "hola", "hola", "hola", "hola", "hola",
              "hola", "hola", "hola", "hola", "hola", "hola", "hola", "hola", "hola", "hola final"];
+var usuario = "@hannamontana";
 
 number=0; //Variable que permite cargar los siguientes 10 tweets
 
@@ -22,13 +23,25 @@ window.onload = function() {
     for(i=0;i<10;i++) {
         //En post se guardaa el HTML para el tweet, agregandole la información de la base de datos
         var post = "<h6 class=\"text-body\">";
-        post += "<div class=\"p-3 border-bottom\"><img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp\" class=\"rounded-circle\" height=\"50\" loading=\"lazy\"/>  ";
+        post += "<div class=\"p-3 border-bottom\">";
+        post += "<img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp\" class=\"rounded-circle\" height=\"50\" loading=\"lazy\"/>  ";
         post += screenname[i];
-        post += "<div style=\"display:inline\" class=\"small text-muted font-weight-normal\"> • </div><span class=\"small text-muted font-weight-normal\">";
+        post += "<div style=\"display:inline\" class=\"small text-muted font-weight-normal\"> • </div>";
+        post += "<span class=\"small text-muted font-weight-normal\">";
         post += username[i];
         post += "</span><span class=\"small text-muted font-weight-normal\">  ";
         post += timestamp[i];
-        post += "</span></div></h6><p class=\"p-3\" style=\"line-height: 1.2;\">";
+        post += "</span>";
+        //Menu para borrar, editar, etc., tus propios tweets
+        if(username[i]==usuario){
+            post += "<div class=\"dropdown\" style=\"display: inline-block\">";
+            post += "<button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" style=\"color: grey\"></button>";
+            post += "<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton1\">";
+            post += "<li><a class=\"dropdown-item\" href=\"#\">Borrar</a></li>";
+            post += "<li><a class=\"dropdown-item\" href=\"#\">Editar</a></li>";
+            post += "</ul></div>";
+        }
+        post += "</div></h6><p class=\"p-3\" style=\"line-height: 1.2;\">";
         post += tweet[i];
         post += "</p>";
         //El contenido de post se agrega como hijo de un div vacío
@@ -45,16 +58,30 @@ function ImprimeTweets(number) {
         for(i=number;(i<(number+10));i++) {
             // Validar que siga habiendo tweets
             if (typeof screenname[i] !== 'undefined') {
+                //En post se guardaa el HTML para el tweet, agregandole la información de la base de datos
                 var post = "<h6 class=\"text-body\">";
-                post += "<div class=\"p-3 border-bottom\"><img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp\" class=\"rounded-circle\" height=\"50\" loading=\"lazy\"/>  ";
+                post += "<div class=\"p-3 border-bottom\">";
+                post += "<img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp\" class=\"rounded-circle\" height=\"50\" loading=\"lazy\"/>  ";
                 post += screenname[i];
-                post += "<div style=\"display:inline\" class=\"small text-muted font-weight-normal\"> • </div><span class=\"small text-muted font-weight-normal\">";
+                post += "<div style=\"display:inline\" class=\"small text-muted font-weight-normal\"> • </div>";
+                post += "<span class=\"small text-muted font-weight-normal\">";
                 post += username[i];
                 post += "</span><span class=\"small text-muted font-weight-normal\">  ";
                 post += timestamp[i];
-                post += "</span></div></h6><p class=\"p-3\" style=\"line-height: 1.2;\">";
+                post += "</span>";
+                //Menu para borrar, editar, etc., tus propios tweets
+                if(username[i]==usuario){
+                    post += "<div class=\"dropdown\" style=\"display: inline-block\">";
+                    post += "<button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" style=\"color: grey\"></button>";
+                    post += "<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton1\">";
+                    post += "<li><a class=\"dropdown-item\" href=\"#\">Borrar</a></li>";
+                    post += "<li><a class=\"dropdown-item\" href=\"#\">Editar</a></li>";
+                    post += "</ul></div>";
+                }
+                post += "</div></h6><p class=\"p-3\" style=\"line-height: 1.2;\">";
                 post += tweet[i];
                 post += "</p>";
+                //El contenido de post se agrega como hijo de un div vacío
                 const div = document.getElementById('divprint');
                 div.insertAdjacentHTML('beforeend', post);
             }
