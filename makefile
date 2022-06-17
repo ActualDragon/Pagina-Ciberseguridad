@@ -8,16 +8,16 @@ env:	## generar ambiente de desarrollo
 	python -m pip install -r requirements.txt
 
 build:   ## start app building first
-	docker-compose up -d --build
+	docker-compose -f containers/dev/compose.yml up -d --build
 
 start:   ## start app
-	docker-compose up -d
+	docker-compose -f containers/dev/compose.yml up -d
 
 stop:   ## stop app
-	docker-compose down
+	docker-compose -f containers/dev/compose.yml down
 
 logs:   ## show app logs
-	docker-compose logs -f
+	docker-compose -f containers/dev/compose.yml logs -f
 
 test:	## generar ambiente de desarrollo
 	. .venv/bin/activate
