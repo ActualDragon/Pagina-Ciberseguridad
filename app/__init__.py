@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_session.__init__ import Session
 from flask.sessions import SecureCookieSessionInterface
-from flask_session.__init__ import Session
 
 from app.classes import FireBaseManager
 import secrets

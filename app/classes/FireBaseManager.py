@@ -14,7 +14,9 @@ class FireBaseManager:
     def __init__(self):
         cred = credentials.Certificate("credentials.json")
         firebase_admin.initialize_app(
-            cred, {"storageBucket": "seguridadproyecto-2a366.appspot.com"}
+            cred, 
+            {"storageBucket": 
+            "seguridadproyecto-2a366.appspot.com"}
         )
         self.firestoreManager = firestore.client()
         config = {
@@ -44,8 +46,10 @@ class FireBaseManager:
                 print(msg,"\n\n\n", file=stderr)
                 return False
             datosUsuario=self.getUsuarioByID(user["localId"])
-            myUser=User.User(user["email"],datosUsuario["nombre"],user["localId"],datosUsuario["usuario"],
-            user["idToken"],user["refreshToken"],int(user["expiresIn"]))
+            myUser=User.User(user["email"],datosUsuario["nombre"],
+            user["localId"],datosUsuario["usuario"],
+            user["idToken"],user["refreshToken"],
+            int(user["expiresIn"]))
             print("USER:\n\n", myUser.correo, file=stderr)
             return myUser
         except Exception as e:
@@ -69,7 +73,8 @@ class FireBaseManager:
                 "tweets":[]
             }
             self.firestoreManager.collection(u'usuarios').document(id).set(newValues)
-            myUser=User.User(mail,nombre,id,username, user["idToken"], user["refreshToken"], 3000)
+            myUser=User.User(mail,nombre,id,username, user["idToken"], 
+            user["refreshToken"], 3000)
             print("USER:\n\n", myUser.correo, file=stderr)
             return myUser
         except Exception as e:

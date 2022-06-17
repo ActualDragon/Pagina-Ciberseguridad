@@ -31,18 +31,19 @@ def registraUsuario():
     password=data["password"]
     confirmaPassword=data["confirmaPassword"]
     username=data["username"]
-    registroExitoso=model.registerUser(nombre,correo, password, confirmaPassword, username)
+    registroExitoso=model.registerUser(nombre,correo, password, 
+    confirmaPassword, username)
     if registroExitoso:
         """data={"success":"true",
         "usuario":session.get("correo")}
         return redirect(url_for("registrar"))"""
         return render_template(
             "registro.html",
-            confirmMsg="Revisa tu correo para confirmarlo, y después podrás hacer login.",
+            confirmMsg="Revisa tu correo para confirmarlo"+"y después podrás hacer login.", # noqa E501
         )
     else:
         redirect(url_for("registrar"))
-        return render_template("registro.html", errorMsg="Error: registrando usuario.")
+        return render_template("registro.html", errorMsg="Error: registrando usuario.") # noqa E501
 
 
 @app.route("/login", methods=["POST"])
