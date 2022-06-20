@@ -24,7 +24,8 @@ var Informacion= {
         {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola final"}
     ],
     "numTweets" : 21,
-    "usuario" : "@hannamontana"
+    "usuario" : "@hannamontana",
+    "nombre" : "Myley Cyrus"
 }
 
 miUsuario = Informacion.usuario;
@@ -106,4 +107,30 @@ $(window).on("scroll", function() {
 function NuevoTweet(){
     var text = document.getElementById("tweetForm").value;
     console.log(text);
+    //Insertar el tweet en la página
+    var post = "<h6 class=\"text-body\">";
+    post += "<div class=\"p-3 border-bottom\">";
+    post += "<img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp\" class=\"rounded-circle\" height=\"50\" loading=\"lazy\"/>  ";
+    post += Informacion.nombre;
+    post += "<div style=\"display:inline\" class=\"small text-muted font-weight-normal\"> • </div>";
+    post += "<span class=\"small text-muted font-weight-normal\">";
+    post += Informacion.usuario;
+    post += "</span><span class=\"small text-muted font-weight-normal\">  ";
+    post += " just now";
+    post += "</span>";
+    post += "<div class=\"dropdown\" style=\"display: inline-block\">";
+    post += "<button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" style=\"color: grey\"></button>";
+    post += "<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton1\">";
+    post += "<li><a class=\"dropdown-item\" href=\"#\">Borrar</a></li>";
+    post += "<li><a class=\"dropdown-item\" href=\"#\">Editar</a></li>";
+    post += "</ul></div>";
+    post += "</div></h6><p class=\"p-3 border-bottom border-dark\" style=\"line-height: 1.2;\">";
+    post += text;
+    post += "</p>";
+    //El contenido de post se agrega antes de los demás tweets
+    const div = document.getElementById('divprint');
+    div.insertAdjacentHTML('afterbegin', post);
+
+    //Post
+    //$.post("tweet/new",tweet);
 }
