@@ -31,10 +31,17 @@ def registraUsuario():
     data = request.form
     # Obtenemos campos de este diccionario
     print(data, "\n\n\n", file=sys.stderr)
-    nombre = data["nombre"]
-    correo = data["correo"]
-    password = data["password"]
-    confirmaPassword = data["confirmaPassword"]
+    nombre = data.get("nombre")
+    correo = data.get("correo")
+    password = data.get("password")
+    confirmaPassword = data.get("confirmaPassword")
+    username = data.get("username")
+    # Validamos que existan todos los campos
+    if not nombre or not correo or not password or not confirmaPassword or not username: # noqa
+        redirect(url_for("registrar"))
+        return render_template(
+            "registro.html", errorMsg="Error: llena todos los campos."
+        )  # noqa E501
     # Validamos que contraseña tenga formato correcto
     passwordValida=re.search(regexp, password)
     if not passwordValida:
@@ -47,7 +54,6 @@ def registraUsuario():
         return render_template(
             "registro.html", errorMsg="Error: las contraseñas no son iguales."
         )
-    username = data["username"]
     #Veamos si ya existe este usuario
     doesUserExist=model.doesUserExist(username)
     if doesUserExist:
