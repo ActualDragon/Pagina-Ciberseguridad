@@ -5,6 +5,10 @@ import pyrebase
 from firebase_admin import credentials, firestore
 
 from app.classes import User
+from requests.exceptions import HTTPError
+import json
+from flask import session #noqa
+from datetime import datetime
 
 
 class FireBaseManager:
@@ -41,7 +45,7 @@ class FireBaseManager:
             if not info["emailVerified"]:
                 msg = "Usuario no verificado"
                 print(msg, "\n\n\n", file=stderr)
-                return False
+                return False, msg
             datosUsuario = self.getUsuarioByID(user["localId"])
             myUser = User.User(
                 user["email"],
@@ -54,9 +58,9 @@ class FireBaseManager:
             )
             print("USER:\n\n", myUser.correo, file=stderr)
             return myUser
-        except Exception as e:
-            print("ERROR LOGIN\n\n:", str(e), file=stderr)
-            return False
+        except HTTPError as e:
+            print("ERROR LOGIN\n\n:", json.loads(e.args[1])["error"]["message"], file=stderr)
+            return False, json.loads(e.args[1])["error"]["message"]
 
     def registraUsuario(self, nombre, mail, password, username):
         auth = self.pyrebaseManager.auth()
