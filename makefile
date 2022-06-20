@@ -8,7 +8,6 @@ env:	## generar ambiente de desarrollo
 	python -m pip install -r requirements.txt
 
 build:  ## build images
-	docker-compose -f containers/dev/compose.yml build
 	docker-compose -f containers/prod/compose.yml build
 
 dev:   ## start development app
@@ -27,9 +26,12 @@ logs-dev:   ## show app logs for dev
 logs-prod:   ## show app logs for staging
 	docker-compose -f containers/prod/compose.yml logs -f
 
+push: ## upload our prod image
+    docker push registry.gitlab.com/cs-2022-2/proyecto/twitter:prod
+
 test:	## generar ambiente de desarrollo
 	. .venv/bin/activate
 	pytest
 	pre-commit run --all
 
-.PHONY: help start stop test
+.PHONY: build dev env help logs-dev logs-prod prod push stop test
