@@ -193,9 +193,13 @@ class FireBaseManager:
         return False
 
     def agregaTweet(self, tweet):
-        userID = session.session("id")
+        userID = session.get("id")
+        username = session.get("username")
+        name = session.get("name")
         newValues = {
             "userID": userID,
+            "name": name,
+            "username": username,
             "tweet": tweet,
             "fecha": datetime.now().strftime("%d/%m/%Y %H:%M:%S"), # dd/mm/YY H:M:S
         }
