@@ -7,8 +7,8 @@ from firebase_admin import credentials, firestore
 from app.classes import User
 from requests.exceptions import HTTPError
 import json
-from flask import session #noqa
-from datetime import datetime
+from flask import session # noqa
+from datetime import datetime # noqa
 
 
 class FireBaseManager:
