@@ -9,6 +9,9 @@ from flask import session  # noqa
 from requests.exceptions import HTTPError
 
 from app.classes import User
+from urlib2 import HTTPError
+from flask import session
+from datetime import datetime
 
 
 class FireBaseManager:
@@ -81,7 +84,6 @@ class FireBaseManager:
                 "email": mail,
                 "UID": id,
                 "usuario": username,
-                "tweets": [],
             }
             self.firestoreManager.collection("usuarios").document(id).set(newValues)
             myUser = User.User(
@@ -189,3 +191,12 @@ class FireBaseManager:
             doc.update(field_updates)
             return True
         return False
+
+    def agregaTweet(self, tweet):
+        userID = session.session("id")
+        newValues = {
+            "userID": userID,
+            "tweet": tweet,
+            "fecha": datetime.now().strftime("%d/%m/%Y %H:%M:%S"), # dd/mm/YY H:M:S
+        }
+        self.firestoreManager.collection("tweets").document().set(newValues)
