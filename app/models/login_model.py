@@ -9,7 +9,7 @@ class login_model:
         if user:
             app.loggedUser = user
             self.startSession(user)
-            return True
+            return True, ""
         else:
             return False, msg
 
