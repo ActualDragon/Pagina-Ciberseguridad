@@ -173,7 +173,7 @@ function EditaTweet(boton){
     //Insertar el tweet original en el entrybox
     document.getElementById(id).value = text;
     //Generar un boton nuevo
-    var boton = "<div class=\"d-flex align-items-center float-end pe-3\"><button id=\"editButton";
+    var boton = "<div class=\"d-flex align-items-center float-end pe-3\"><button id=\"editButton_";
     boton += numid;
     boton += "\" type=\"button\" onclick=\"TweetEditado(this)\" class=\"btn btn-primary btn-rounded\">Publicar</button></div>";
     //Insertar el boton
@@ -189,6 +189,19 @@ function TweetEditado(boton){
     numid = splitId[1];
     var id = "Tweet";
     id += numid;
+    //Eliminar el boton "publicar"
+    document.getElementById(idOriginal).remove();
     //Obtener el texto del tweet
-    var text = document.getElementById(id).innerHTML;
+    var text = document.getElementById(id).value;
+    //Generar el entrybox
+    const paragraph = document.createElement('p');
+    //Reemplazar el contenido original con el entrybox
+    document.getElementById(id).replaceWith(paragraph);
+    //Darle formato al parrafo
+    paragraph.setAttribute("id", id);
+    paragraph.setAttribute("class","p-3 border-bottom border-dark");
+    document.getElementById(id).textContent = text;
+
+    //Post
+    //$.post("tweet/id/edit",text);
 }
