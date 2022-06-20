@@ -48,6 +48,13 @@ def registraUsuario():
             "registro.html", errorMsg="Error: las contraseñas no son iguales."
         )
     username = data["username"]
+    #Veamos si ya existe este usuario
+    doesUserExist=model.doesUserExist(username)
+    if doesUserExist:
+        redirect(url_for("registrar"))
+        return render_template(
+            "registro.html", errorMsg="Error: ya existe este usuario: "+username+"."
+        )
     registroExitoso = model.registerUser(
         nombre, correo, password, confirmaPassword, username
     )
