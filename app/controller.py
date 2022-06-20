@@ -5,7 +5,7 @@ from flask import redirect, render_template, request, session, url_for
 from app import app
 from app.models import login_model
 from app.views import index_view
-
+import re
 
 @app.route("/")
 def index():
@@ -21,6 +21,8 @@ def registrar():
 
 @app.route("/registraUsuario", methods=["POST"])
 def registraUsuario():
+    # Nuestra expresión regular de contraseñas
+    regexp="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
     # Instanciamos modelo login que sirve para login y registro
     model = login_model.login_model()
     # Obtenemos la información enviada por POST
@@ -33,6 +35,18 @@ def registraUsuario():
     correo = data["correo"]
     password = data["password"]
     confirmaPassword = data["confirmaPassword"]
+    # Validamos que contraseña tenga formato correcto
+    passwordValida=re.search(regexp, password)
+    if not passwordValida:
+        redirect(url_for("registrar"))
+        return render_template(
+            "registro.html", errorMsg="Error: la contraseña debe de ser de mínimo 8 caractéres, tener una letra mayúscula, minúscula y  un número."
+        )  # noqa E501
+    if password!=confirmaPassword:
+        redirect(url_for("registrar"))
+        return render_template(
+            "registro.html", errorMsg="Error: las contraseñas no son iguales."
+        )
     username = data["username"]
     registroExitoso = model.registerUser(
         nombre, correo, password, confirmaPassword, username
