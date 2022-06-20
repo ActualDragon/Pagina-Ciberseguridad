@@ -21,7 +21,7 @@ var Informacion= {
         {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
         {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
         {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola final"}
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola final"}
     ],
     "numTweets" : 21,
     "usuario" : "@hannamontana",
@@ -67,12 +67,18 @@ function ImprimeTweets(number) {
                 if(Informacion.TweetsRecibidos[i].username==miUsuario){
                     post += "<div class=\"dropdown\" style=\"display: inline-block\">";
                     post += "<button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" style=\"color: grey\"></button>";
-                    post += "<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton1\">";
-                    post += "<li><a class=\"dropdown-item\" href=\"#\">Borrar</a></li>";
-                    post += "<li><a class=\"dropdown-item\" href=\"#\">Editar</a></li>";
+                    post += "<ul class=\"dropdown-menu\">";
+                    post += "<li><a class=\"dropdown-item\" onclick=\"BorraTweet(this)\" id=\"Borrar_";
+                    post += i;
+                    post += "\">Borrar</a></li>";
+                    post += "<li><a class=\"dropdown-item\"  onclick=\"EditaTweet(this)\" id=\"Editar_";
+                    post += i;
+                    post += "\">Editar</a></li>";
                     post += "</ul></div>";
                 }
-                post += "</div></h6><p class=\"p-3 border-bottom border-dark\" style=\"line-height: 1.2;\">";
+                post += "</div></h6><p class=\"p-3 border-bottom border-dark\" id=\"Tweet";
+                post += i;
+                post += "\" style=\"line-height: 1.2;\">";
                 post += Informacion.TweetsRecibidos[i].tweet;
                 post += "</p>";
                 //El contenido de post se agrega como hijo de un div vacío
@@ -133,4 +139,25 @@ function NuevoTweet(){
 
     //Post
     //$.post("tweet/new",tweet);
+}
+
+//Borrar un tweet
+function BorraTweet(boton){
+    idOriginal=boton.id;
+    splitId = idOriginal.split("_");
+    numid = splitId[1];
+    var id = "Tweet";
+    id += numid;
+    console.log(id);
+
+}
+
+//Editar un tweet
+function EditaTweet(boton){
+    idOriginal=boton.id;
+    splitId = idOriginal.split("_");
+    numid = splitId[1];
+    var id = "Tweet";
+    id += numid;
+    console.log(id);
 }
