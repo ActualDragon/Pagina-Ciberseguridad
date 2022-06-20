@@ -71,7 +71,7 @@ def registraUsuario():
         return render_template(
             "registro.html",
             confirmMsg="Revisa tu correo para confirmarlo"
-            + "y después podrás hacer login.",  # noqa E501
+            + " y después podrás hacer login.",  # noqa E501
         )
     else:
         redirect(url_for("registrar"))
@@ -86,13 +86,12 @@ def login():
     data = request.form
     user = data["correo"]
     password = data["password"]
-    doesUserExist = model.loginUser(user, password)
+    doesUserExist, msg = model.loginUser(user, password)
     if doesUserExist:
-        data = {"success": "true", "usuario": session.get("correo")}
         return redirect(url_for("main"))
     else:
         redirect(url_for("index"))
-        return render_template("index.html", errorMsg="Error: Error de Login.")
+        return render_template("index.html", errorMsg="ERROR: "+msg)
 
 
 @app.route("/main")
