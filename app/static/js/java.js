@@ -133,7 +133,7 @@ function NuevoTweet(){
     post += "</div></h6><p class=\"p-3 border-bottom border-dark\" style=\"line-height: 1.2;\">";
     post += text;
     post += "</p>";
-    //El contenido de post se agrega antes de los demás tweets
+    //El contenido se agrega antes de los demás tweets
     const div = document.getElementById('divprint');
     div.insertAdjacentHTML('afterbegin', post);
 
@@ -148,16 +148,47 @@ function BorraTweet(boton){
     numid = splitId[1];
     var id = "Tweet";
     id += numid;
-    console.log(id);
-
 }
 
 //Editar un tweet
 function EditaTweet(boton){
+    //Obtener el id del boton a editar
     idOriginal=boton.id;
     splitId = idOriginal.split("_");
     numid = splitId[1];
     var id = "Tweet";
     id += numid;
-    console.log(id);
+    //Obtener el texto del tweet original
+    var text = document.getElementById(id).innerHTML;
+    //Generar el entrybox
+    const textarea = document.createElement('textarea');
+    //Reemplazar el contenido original con el entrybox
+    document.getElementById(id).replaceWith(textarea);
+    //Darle formato al entrybox nuevo
+    textarea.setAttribute("id", id);
+    textarea.setAttribute("class", "form-control form-status border-0 pe-3");
+    textarea.setAttribute("type", "text");
+    textarea.setAttribute("maxlength", "512");
+    textarea.setAttribute("rows","2");
+    //Insertar el tweet original en el entrybox
+    document.getElementById(id).value = text;
+    //Generar un boton nuevo
+    var boton = "<div class=\"d-flex align-items-center float-end pe-3\"><button id=\"editButton";
+    boton += numid;
+    boton += "\" type=\"button\" onclick=\"TweetEditado(this)\" class=\"btn btn-primary btn-rounded\">Publicar</button></div>";
+    //Insertar el boton
+    var div = document.getElementById(id);
+    div.insertAdjacentHTML('afterend', boton);
+}
+
+//Publicar el tweet editado
+function TweetEditado(boton){
+    //Obtener el id del boton a editar
+    idOriginal=boton.id;
+    splitId = idOriginal.split("_");
+    numid = splitId[1];
+    var id = "Tweet";
+    id += numid;
+    //Obtener el texto del tweet
+    var text = document.getElementById(id).innerHTML;
 }
