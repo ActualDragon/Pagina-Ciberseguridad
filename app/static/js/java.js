@@ -1,27 +1,27 @@
 //JSON temporal en lo que queda la base de datos
 var Informacion= {
     "TweetsRecibidos" : [
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@myleycyrus", "timestamp":"2h", "tweet":"hola"},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola final"}
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola final", "id":0}
     ],
     "numTweets" : 21,
     "usuario" : "@hannamontana",
@@ -127,8 +127,12 @@ function NuevoTweet(){
     post += "<div class=\"dropdown\" style=\"display: inline-block\">";
     post += "<button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" style=\"color: grey\"></button>";
     post += "<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton1\">";
-    post += "<li><a class=\"dropdown-item\" href=\"#\">Borrar</a></li>";
-    post += "<li><a class=\"dropdown-item\" href=\"#\">Editar</a></li>";
+    post += "<li><a class=\"dropdown-item\" onclick=\"BorraTweet(this)\" id=\"Borrar_";
+    post += Informacion.numTweets+1;
+    post += "\">Borrar</a></li>";
+    post += "<li><a class=\"dropdown-item\" onclick=\"EditaTweet(this)\" id=\"Editar_";
+    post += Informacion.numTweets+1;
+    post += ">Editar</a></li>";
     post += "</ul></div>";
     post += "</div></h6><p class=\"p-3 border-bottom border-dark\" style=\"line-height: 1.2;\">";
     post += text;
@@ -203,5 +207,5 @@ function TweetEditado(boton){
     document.getElementById(id).textContent = text;
 
     //Post
-    //$.post("tweet/id/edit",text);
+    //$.post("tweet/Informacion.TweetsRecibidos[numid].id/edit",text);
 }
