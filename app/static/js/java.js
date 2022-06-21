@@ -31,6 +31,7 @@ var Informacion= {
 miUsuario = Informacion.usuario;
 numeroTweets = Informacion.numTweets-1;
 number=0; //Variable que determina cuántos tweets se han impreso
+idActual = numeroTweets;
 
 //Función que imprime los primeros 10 tweets
 window.onload = function() {
@@ -114,10 +115,10 @@ $(window).on("scroll", function() {
 //Obtener el texto de un tweet nuevo
 function NuevoTweet(){
     var text = document.getElementById("tweetForm").value;
-    console.log(text);
+    idActual++;
     //Generar el HTML para insertar el tweet en la página
     var post = "<h6 class=\"text-body\" id=\"Post_";
-    post += Informacion.numTweets+1;
+    post += idActual;
     post += "\"><div class=\"p-3 border-bottom\">";
     post += "<img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp\" class=\"rounded-circle\" height=\"50\" loading=\"lazy\"/>  ";
     post += Informacion.nombre;
@@ -131,11 +132,11 @@ function NuevoTweet(){
     post += "<button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" style=\"color: grey\"></button>";
     post += "<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton1\">";
     post += "<li><a class=\"dropdown-item\" onclick=\"BorraTweet(this)\" id=\"Borrar_";
-    post += Informacion.numTweets+1;
+    post += idActual;
     post += "\">Borrar</a></li>";
     post += "<li><a class=\"dropdown-item\" onclick=\"EditaTweet(this)\" id=\"Editar_";
-    post += Informacion.numTweets+1;
-    post += ">Editar</a></li>";
+    post += idActual;
+    post += "\">Editar</a></li>";
     post += "</ul></div>";
     post += "</div></h6><p class=\"p-3 border-bottom border-dark\" style=\"line-height: 1.2;\">";
     post += text;
@@ -171,7 +172,7 @@ function EditaTweet(boton){
     //Insertar el tweet original en el entrybox
     document.getElementById(id).value = text;
     //Generar un boton nuevo
-    var boton = "<div class=\"d-flex align-items-center float-end pe-3\"><button id=\"editButton_";
+    var button = "<div class=\"d-flex align-items-center float-end pe-3\"><button id=\"editButton_";
     button += numid;
     button += "\" type=\"button\" onclick=\"TweetEditado(this)\" class=\"btn btn-primary btn-rounded\">Publicar</button></div>";
     //Insertar el boton
