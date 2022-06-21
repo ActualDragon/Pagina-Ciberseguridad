@@ -176,15 +176,16 @@ class FireBaseManager:
             return False
         return followers
 
-    def modificarTweet(self, id, nuevoTweet, date, oldTweet, metadata):
+    def editarTweet(self, id, nuevoTweet, date, oldTweet, metadata):
+        print("\n\n\n", oldTweet, "\n\n\n", metadata, "\n\n\n", file=stderr)
         if oldTweet["userID"] != metadata["userID"]:
            return False, "Unvalid credentials"
         tweetRef = self.firestoreManager.collection("tweets").document(id)
         if tweetRef is None:
-            False
+            False, "No existe tweet"
         args = { "tweet": nuevoTweet, "date": date }
         tweetRef.update(args)
-        return True
+        return True, "Success"
 
     def eliminarTweet(self, id, userID, sessionID):
         if userID != sessionID:
@@ -210,7 +211,7 @@ class FireBaseManager:
         }
         try:
             self.firestoreManager.collection("tweets").document().set(newValues)
-            return True, "success"
+            return True, "Success"
         except HTTPError as e:
             print(
                 "ERROR AGREGAR TWEET:\n\n",
@@ -228,11 +229,8 @@ class FireBaseManager:
         return tweetList
 
     def getTweetByID(self, id):
-        # Esto va a regresar un cursor.
+        # Esto podría regresar un cursor (en nuestro caso no), puede ser el get().
         tweet = self.firestoreManager.collection("tweets").document(id).get()
         if tweet is None:
             return False, "None existing id."
-        # Iteramos el cursor para acceder al tweet.
-        for t in tweet:
-            return t.to_dict(), "success"
-        return False, "Error in cursor iteration."
+        return tweet.to_dict(), "Success"

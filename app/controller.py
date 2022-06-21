@@ -4,7 +4,7 @@ import sys
 from flask import redirect, render_template, request, session, url_for
 
 from app import app
-from app.models import login_model
+from app.models import login_model, tweet_model
 from app.views import index_view
 
 
@@ -140,7 +140,7 @@ def generarTweet():
     return redirect(url_for("index"))
 
 @app.route("/tweets/<id>/edit", methods=["PATCH"])
-def editarTweet():
+def editarTweet(id):
     model = tweet_model.tweet_model()
     data = request.form
 
@@ -148,9 +148,11 @@ def editarTweet():
     print(data, "\n\n\n", file=sys.stderr)
 
     # Verificamos contenido del tweet.
-        if data["tweet"] == "" or len(data["tweet"]) > 512:
+    if data["tweet"] == "" or len(data["tweet"]) > 512:
         print("Tweet invalido, debe tener entre 1 y 512 caracteres.")
         return "Error en tweet"
 
     # Request entry to DB.
     model.modifyTweet(data["tweet"], id)
+
+    return redirect(url_for("index"))

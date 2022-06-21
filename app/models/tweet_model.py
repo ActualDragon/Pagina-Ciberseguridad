@@ -38,7 +38,7 @@ class tweet_model:
 
     def modifyTweet(self, newTweet, id):
         metadata = self.tweetMetadata()
-        oldTweet = app.firebaseManager.getTweetByID(id)
+        oldTweet, msg = app.firebaseManager.getTweetByID(id)
         editDate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
         valid, msg = app.firebaseManager.editarTweet(id, newTweet, editDate, oldTweet, metadata)
