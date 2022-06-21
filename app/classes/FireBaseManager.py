@@ -1,11 +1,9 @@
 import json
-from datetime import datetime  # noqa
 from sys import stderr
 
 import firebase_admin
 import pyrebase
 from firebase_admin import credentials, firestore
-from flask import session  # noqa
 from requests.exceptions import HTTPError
 
 from app.classes import User
@@ -81,7 +79,6 @@ class FireBaseManager:
                 "email": mail,
                 "UID": id,
                 "usuario": username,
-                "tweets": [],
             }
             self.firestoreManager.collection("usuarios").document(id).set(newValues)
             myUser = User.User(
@@ -175,17 +172,37 @@ class FireBaseManager:
             return False
         return followers
 
-    def modificarTweet(self, id, idTweet, nuevoTweet):
-        tweetsRef = (
-            self.firestoreManager.collection("usuarios")
-            .document(id)
-            .collection("tweets")
-        )
-        query = tweetsRef.where("idNum", "==", int(idTweet)).get()
-        field_updates = {"contenido": nuevoTweet, "fecha": ""}
-        for tweet in query:
+    def modificarTweet(self, id, nuevoTweet, date):
+        tweetRef = self.firestoreManager.collection("tweets").document(id)
+        if tweetRef is None:
+            False
+        # tweetRef.update("tweet": nuevoTweet, "date": date) ## Invalid syntax
+        return True
+        # query = tweetsRef.where("idNum", "==", int(idTweet)).get()
+        # field_updates = {"contenido": nuevoTweet, "fecha": date}
+        # for tweet in query:
+        #     doc = tweetsRef.document(tweet.id)
+        #     doc.update(field_updates)
+        #     return True
+        # return False
 
-            doc = tweetsRef.document(tweet.id)
-            doc.update(field_updates)
+    def eliminarTweet(self, id):
+        try:
+            self.firestoreManager.collection("tweets").document(id).delete()
             return True
-        return False
+        except Exception as e:
+            print("ERROR DELETE TWEET\n\n:", str(e), file=stderr)
+            return False
+
+    def agregaTweet(self, tweet, userInfo, date):
+        newValues = {
+            "userID": userInfo["userID"],
+            "name": userInfo["name"],
+            "username": userInfo["username"],
+            "tweet": tweet,
+            "fecha": date,  # dd/mm/YY H:M:S
+        }
+        self.firestoreManager.collection("tweets").document().set(newValues)
+
+    def sendTweets(self):
+        return self.firestoreManager.collection("tweets")
