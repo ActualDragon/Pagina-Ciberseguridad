@@ -2,25 +2,25 @@
 var Informacion= {
     "TweetsRecibidos" : [
         {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
         {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
+        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
         {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola final", "id":0}
     ],
     "numTweets" : 21,
@@ -32,7 +32,7 @@ miUsuario = Informacion.usuario;
 numeroTweets = Informacion.numTweets-1;
 number=0; //Variable que determina cuántos tweets se han impreso
 
-//Función que imporime los primeros 10 tweets
+//Función que imprime los primeros 10 tweets
 window.onload = function() {
     ImprimeTweets(number);
 }
@@ -44,7 +44,7 @@ const sleep = async (milliseconds) => {
     });
 };
 
-//Función que imprime los siguientes 10 tweets cuando se llega al final de la página
+//Función que imprime los tweets
 function ImprimeTweets(number) {
     // testSleep genera un pequeño delay al cargar los tweets nuevos
     const testSleep = async () => {
@@ -52,9 +52,10 @@ function ImprimeTweets(number) {
         for(i=number;(i<(number+10));i++) {
             // Validar que siga habiendo tweets
             if (i<=numeroTweets) {
-                //En post se guardaa el HTML para el tweet, agregandole la información de la base de datos
-                var post = "<h6 class=\"text-body\">";
-                post += "<div class=\"p-3 border-bottom\">";
+                //En post se guarda el HTML para el tweet, agregandole la información de la base de datos
+                var post = "<h6 class=\"text-body\" id=\"Post_";
+                post += i;
+                post += "\"><div class=\"p-3 border-bottom\">";
                 post += "<img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp\" class=\"rounded-circle\" height=\"50\" loading=\"lazy\"/>  ";
                 post += Informacion.TweetsRecibidos[i].screenname;
                 post += "<div style=\"display:inline\" class=\"small text-muted font-weight-normal\"> • </div>";
@@ -105,6 +106,7 @@ $(window).on("scroll", function() {
     if(((scrollHeight - 300) >= scrollPos) / scrollHeight == 0){
         number = number+10;
         $("#cargar").click();
+        //Función que carga los siguientes 10 tweets cuando se llega al final de la página
         $("#cargar").onclick=ImprimeTweets(number);
     }
     });
@@ -113,9 +115,10 @@ $(window).on("scroll", function() {
 function NuevoTweet(){
     var text = document.getElementById("tweetForm").value;
     console.log(text);
-    //Insertar el tweet en la página
-    var post = "<h6 class=\"text-body\">";
-    post += "<div class=\"p-3 border-bottom\">";
+    //Generar el HTML para insertar el tweet en la página
+    var post = "<h6 class=\"text-body\" id=\"Post_";
+    post += Informacion.numTweets+1;
+    post += "\"><div class=\"p-3 border-bottom\">";
     post += "<img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp\" class=\"rounded-circle\" height=\"50\" loading=\"lazy\"/>  ";
     post += Informacion.nombre;
     post += "<div style=\"display:inline\" class=\"small text-muted font-weight-normal\"> • </div>";
@@ -141,22 +144,13 @@ function NuevoTweet(){
     const div = document.getElementById('divprint');
     div.insertAdjacentHTML('afterbegin', post);
 
-    //Post
+    //Post a la base de datos
     //$.post("tweet/new",tweet);
-}
-
-//Borrar un tweet
-function BorraTweet(boton){
-    idOriginal=boton.id;
-    splitId = idOriginal.split("_");
-    numid = splitId[1];
-    var id = "Tweet";
-    id += numid;
 }
 
 //Editar un tweet
 function EditaTweet(boton){
-    //Obtener el id del boton a editar
+    //Obtener el id del tweet a editar
     idOriginal=boton.id;
     splitId = idOriginal.split("_");
     numid = splitId[1];
@@ -178,16 +172,16 @@ function EditaTweet(boton){
     document.getElementById(id).value = text;
     //Generar un boton nuevo
     var boton = "<div class=\"d-flex align-items-center float-end pe-3\"><button id=\"editButton_";
-    boton += numid;
-    boton += "\" type=\"button\" onclick=\"TweetEditado(this)\" class=\"btn btn-primary btn-rounded\">Publicar</button></div>";
+    button += numid;
+    button += "\" type=\"button\" onclick=\"TweetEditado(this)\" class=\"btn btn-primary btn-rounded\">Publicar</button></div>";
     //Insertar el boton
     var div = document.getElementById(id);
-    div.insertAdjacentHTML('afterend', boton);
+    div.insertAdjacentHTML('afterend', button);
 }
 
 //Publicar el tweet editado
 function TweetEditado(boton){
-    //Obtener el id del boton a editar
+    //Obtener el id del tweet a editar
     idOriginal=boton.id;
     splitId = idOriginal.split("_");
     numid = splitId[1];
@@ -206,6 +200,24 @@ function TweetEditado(boton){
     paragraph.setAttribute("class","p-3 border-bottom border-dark");
     document.getElementById(id).textContent = text;
 
-    //Post
-    //$.post("tweet/Informacion.TweetsRecibidos[numid].id/edit",text);
+    //Post a la base de datos
+    //$.post("tweet/Informacion.TweetsRecibidos[numid].id/update",text);
+}
+
+//Borrar un tweet
+function BorraTweet(boton) {
+    //Obtener el id del tweet a editar
+    idOriginal=boton.id;
+    splitId = idOriginal.split("_");
+    numid = splitId[1];
+    var text = "Tweet"
+    var id = "Post_";
+    id += numid;
+    text += numid;
+    //Eliminar el tweet
+    document.getElementById(id).remove();
+    document.getElementById(text).remove();
+
+    //Post a la base de datos
+    //$.post("tweet/Informacion.TweetsRecibidos[numid].id/delete",text);
 }
