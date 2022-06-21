@@ -183,19 +183,25 @@ class FireBaseManager:
         tweetRef = self.firestoreManager.collection("tweets").document(id)
         if tweetRef is None:
             False, "No existe tweet"
-        args = { "tweet": nuevoTweet, "date": date }
+        args = { "tweet": nuevoTweet, "fecha": date }
         tweetRef.update(args)
         return True, "Success"
 
-    def eliminarTweet(self, id, userID, sessionID):
-        if userID != sessionID:
+    def eliminarTweet(self, id, oldTweet, metadata):
+        print("\n\n\n", oldTweet, "\n\n\n", metadata, "\n\n\n", file=stderr)
+        if oldTweet is None:
+            print("User data is None.")
+            return False, "No data available for delete."
+        if oldTweet["userID"] != metadata["userID"]:
+            print("Tweet not available credentials.")
             return False, "Unvalid credentials"
         try:
             self.firestoreManager.collection("tweets").document(id).delete()
-            return True
+            print("Tweet deleted.")
+            return True, "Success"
         except HTTPError as e:
             print(
-                "ERROR LOGIN\n\n:",
+                "ERROR EN DELETE\n\n:",
                 json.loads(e.args[1])["error"]["message"],
                 file=stderr,
             )

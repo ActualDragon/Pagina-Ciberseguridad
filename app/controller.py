@@ -40,11 +40,11 @@ def registraUsuario():
     # Validamos que existan todos los campos
     if (
         not nombre or not correo or not password or not confirmaPassword or not username
-    ):  # noqa
+    ):
         redirect(url_for("registrar"))
         return render_template(
             "registro.html", errorMsg="Error: llena todos los campos."
-        )  # noqa E501
+        ) 
     # Validamos que contraseña tenga formato correcto
     passwordValida = re.search(regexp, password)
     if not passwordValida:
@@ -75,13 +75,13 @@ def registraUsuario():
         return render_template(
             "registro.html",
             confirmMsg="Revisa tu correo para confirmarlo"
-            + " y después podrás hacer login.",  # noqa E501
+            + " y después podrás hacer login.",
         )
     else:
         redirect(url_for("registrar"))
         return render_template(
             "registro.html", errorMsg="Error: registrando usuario."
-        )  # noqa E501
+        ) 
 
 
 @app.route("/login", methods=["POST"])
@@ -154,5 +154,14 @@ def editarTweet(id):
 
     # Request entry to DB.
     model.modifyTweet(data["tweet"], id)
+
+    return redirect(url_for("index"))
+
+@app.route("/tweets/<id>/delete", methods=["DELETE"])
+def eliminarTweet(id):
+    model = tweet_model.tweet_model()
+
+    # Request entry to DB.
+    model.deleteTweet(id)
 
     return redirect(url_for("index"))

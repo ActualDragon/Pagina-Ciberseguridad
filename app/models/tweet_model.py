@@ -43,3 +43,8 @@ class tweet_model:
 
         valid, msg = app.firebaseManager.editarTweet(id, newTweet, editDate, oldTweet, metadata)
 
+    def deleteTweet(self, id):
+        metadata = self.tweetMetadata()
+        oldTweet, msg = app.firebaseManager.getTweetByID(id)
+
+        valid, msg = app.firebaseManager.eliminarTweet(id, oldTweet, metadata)
