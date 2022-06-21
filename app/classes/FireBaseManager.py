@@ -1,12 +1,12 @@
+import json
 from sys import stderr
 
 import firebase_admin
 import pyrebase
 from firebase_admin import credentials, firestore
+from requests.exceptions import HTTPError
 
 from app.classes import User
-from requests.exceptions import HTTPError
-import json
 
 
 class FireBaseManager:
@@ -173,9 +173,7 @@ class FireBaseManager:
         return followers
 
     def modificarTweet(self, id, nuevoTweet, date):
-        tweetRef = (
-            self.firestoreManager.collection("tweets").document(id)
-        )
+        tweetRef = self.firestoreManager.collection("tweets").document(id)
         if tweetRef is None:
             False
         # tweetRef.update("tweet": nuevoTweet, "date": date) ## Invalid syntax
@@ -202,7 +200,7 @@ class FireBaseManager:
             "name": userInfo["name"],
             "username": userInfo["username"],
             "tweet": tweet,
-            "fecha": date # dd/mm/YY H:M:S
+            "fecha": date,  # dd/mm/YY H:M:S
         }
         self.firestoreManager.collection("tweets").document().set(newValues)
 
