@@ -1,15 +1,12 @@
-import json
 from sys import stderr
 
 import firebase_admin
 import pyrebase
 from firebase_admin import credentials, firestore
-from flask import session  # noqa
-from requests.exceptions import HTTPError
 
 from app.classes import User
-from urlib2 import HTTPError
-from flask import session
+from requests.exceptions import HTTPError
+import json
 
 
 class FireBaseManager:
@@ -208,3 +205,6 @@ class FireBaseManager:
             "fecha": date # dd/mm/YY H:M:S
         }
         self.firestoreManager.collection("tweets").document().set(newValues)
+
+    def sendTweets(self):
+        return self.firestoreManager.collection('tweets')
