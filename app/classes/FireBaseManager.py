@@ -191,6 +191,14 @@ class FireBaseManager:
         #     return True
         # return False
 
+    def eliminarTweet(self, id):
+        try:
+            self.firestoreManager.collection('tweets').document(id).delete()
+            return True
+        except Exception as e:
+            print("Error on delete tweet: " + e)
+            return False
+
     def agregaTweet(self, tweet, userInfo, date):
         newValues = {
             "userID": userInfo["userID"],
