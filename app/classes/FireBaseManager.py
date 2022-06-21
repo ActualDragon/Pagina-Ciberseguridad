@@ -174,11 +174,11 @@ class FireBaseManager:
 
     def modificarTweet(self, id, nuevoTweet, date):
         tweetRef = (
-            self.firestoreManager.collection("tweets").document(id);
+            self.firestoreManager.collection("tweets").document(id)
         )
         if tweetRef is None:
             False
-        tweetRef.update("tweet": nuevoTweet, "date": date)
+        # tweetRef.update("tweet": nuevoTweet, "date": date) ## Invalid syntax
         return True
         # query = tweetsRef.where("idNum", "==", int(idTweet)).get()
         # field_updates = {"contenido": nuevoTweet, "fecha": date}
@@ -193,7 +193,7 @@ class FireBaseManager:
             self.firestoreManager.collection('tweets').document(id).delete()
             return True
         except Exception as e:
-            print("Error on delete tweet: " + e)
+            print("ERROR DELETE TWEET\n\n:", str(e), file=stderr)
             return False
 
     def agregaTweet(self, tweet, userInfo, date):
