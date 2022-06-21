@@ -1,3 +1,4 @@
+import re
 import sys
 
 from flask import redirect, render_template, request, session, url_for
@@ -5,7 +6,7 @@ from flask import redirect, render_template, request, session, url_for
 from app import app
 from app.models import login_model
 from app.views import index_view
-import re
+
 
 @app.route("/")
 def index():
@@ -22,7 +23,7 @@ def registrar():
 @app.route("/registraUsuario", methods=["POST"])
 def registraUsuario():
     # Nuestra expresión regular de contraseñas
-    regexp="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+    regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"  # noqa W605
     # Instanciamos modelo login que sirve para login y registro
     model = login_model.login_model()
     # Obtenemos la información enviada por POST
@@ -37,29 +38,32 @@ def registraUsuario():
     confirmaPassword = data.get("confirmaPassword")
     username = data.get("username")
     # Validamos que existan todos los campos
-    if not nombre or not correo or not password or not confirmaPassword or not username: # noqa
+    if (
+        not nombre or not correo or not password or not confirmaPassword or not username
+    ):  # noqa
         redirect(url_for("registrar"))
         return render_template(
             "registro.html", errorMsg="Error: llena todos los campos."
         )  # noqa E501
     # Validamos que contraseña tenga formato correcto
-    passwordValida=re.search(regexp, password)
+    passwordValida = re.search(regexp, password)
     if not passwordValida:
         redirect(url_for("registrar"))
         return render_template(
-            "registro.html", errorMsg="Error: la contraseña debe de ser de mínimo 8 caractéres, tener una letra mayúscula, minúscula y  un número."
-        )  # noqa E501
-    if password!=confirmaPassword:
+            "registro.html",
+            errorMsg="Error: la contraseña debe de ser de mínimo 8 caractéres, tener una letra mayúscula, minúscula y  un número.",  # noqa E501
+        )
+    if password != confirmaPassword:
         redirect(url_for("registrar"))
         return render_template(
             "registro.html", errorMsg="Error: las contraseñas no son iguales."
         )
-    #Veamos si ya existe este usuario
-    doesUserExist=model.doesUserExist(username)
+    # Veamos si ya existe este usuario
+    doesUserExist = model.doesUserExist(username)
     if doesUserExist:
         redirect(url_for("registrar"))
         return render_template(
-            "registro.html", errorMsg="Error: ya existe este usuario: "+username+"."
+            "registro.html", errorMsg="Error: ya existe este usuario: " + username + "."
         )
     registroExitoso = model.registerUser(
         nombre, correo, password, confirmaPassword, username
@@ -91,7 +95,7 @@ def login():
         return redirect(url_for("main"))
     else:
         redirect(url_for("index"))
-        return render_template("index.html", errorMsg="ERROR: "+msg)
+        return render_template("index.html", errorMsg="ERROR: " + msg)
 
 
 @app.route("/main")

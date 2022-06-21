@@ -1,14 +1,14 @@
+import json
+from datetime import datetime  # noqa
 from sys import stderr
 
 import firebase_admin
 import pyrebase
 from firebase_admin import credentials, firestore
+from flask import session  # noqa
+from requests.exceptions import HTTPError
 
 from app.classes import User
-from requests.exceptions import HTTPError
-import json
-from flask import session # noqa
-from datetime import datetime # noqa
 
 
 class FireBaseManager:
@@ -59,7 +59,11 @@ class FireBaseManager:
             print("USER:\n\n", myUser.correo, file=stderr)
             return myUser
         except HTTPError as e:
-            print("ERROR LOGIN\n\n:", json.loads(e.args[1])["error"]["message"], file=stderr)
+            print(
+                "ERROR LOGIN\n\n:",
+                json.loads(e.args[1])["error"]["message"],
+                file=stderr,
+            )
             return False, json.loads(e.args[1])["error"]["message"]
 
     def registraUsuario(self, nombre, mail, password, username):

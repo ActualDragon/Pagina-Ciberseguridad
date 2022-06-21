@@ -21,7 +21,7 @@ class login_model:
             return True
         else:
             return False
-    
+
     def doesUserExist(self, username):
         return app.firebaseManager.getUsuarioByUsername(username)
 
