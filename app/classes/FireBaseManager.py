@@ -190,7 +190,7 @@ class FireBaseManager:
 
     def eliminarTweet(self, id):
         try:
-            self.firestoreManager.collection('tweets').document(id).delete()
+            self.firestoreManager.collection("tweets").document(id).delete()
             return True
         except Exception as e:
             print("ERROR DELETE TWEET\n\n:", str(e), file=stderr)
@@ -207,4 +207,4 @@ class FireBaseManager:
         self.firestoreManager.collection("tweets").document().set(newValues)
 
     def sendTweets(self):
-        return self.firestoreManager.collection('tweets')
+        return self.firestoreManager.collection("tweets")
