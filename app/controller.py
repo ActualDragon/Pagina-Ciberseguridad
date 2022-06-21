@@ -116,3 +116,41 @@ def logout():
         session.pop("nombre", None)
         session.pop("correo", None)
         return redirect(url_for("index"))
+
+@app.route("/tweets/new", methods=["POST"])
+def generarTweet():
+    # Instanciamos el objeto de tweet_model.
+    model = tweet_model.tweet_model()
+    # Obtenemos la información enviada por POST
+    # de nuestra form. Se maneja como un diccionario
+    # e.g data["nombre"]
+    data = request.form
+
+    # Obtenemos campos de este diccionario
+    print(data, "\n\n\n", file=sys.stderr)
+
+    # Verificamos contenido del tweet.
+    if data["tweet"] == "" or len(data["tweet"]) > 512:
+        print("Tweet invalido, debe tener entre 1 y 512 caracteres.")
+        return "Error en tweet"
+
+    # Request entry to DB.
+    model.sendTweet(data["tweet"])
+
+    return redirect(url_for("index"))
+
+@app.route("/tweets/<id>/edit", methods=["PATCH"])
+def editarTweet():
+    model = tweet_model.tweet_model()
+    data = request.form
+
+    # Obtenemos campos de este diccionario
+    print(data, "\n\n\n", file=sys.stderr)
+
+    # Verificamos contenido del tweet.
+        if data["tweet"] == "" or len(data["tweet"]) > 512:
+        print("Tweet invalido, debe tener entre 1 y 512 caracteres.")
+        return "Error en tweet"
+
+    # Request entry to DB.
+    model.modifyTweet(data["tweet"], id)

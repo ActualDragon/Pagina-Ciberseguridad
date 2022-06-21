@@ -32,9 +32,14 @@ class tweet_model:
         tweetDate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
         # Agregamos tweet a DB.
-        valida,msg=app.firebaseManager.agregaTweet(tweet, userInfo, tweetDate)
+        valida, msg = app.firebaseManager.agregaTweet(tweet, userInfo, tweetDate)
 
         return valida,msg
 
+    def modifyTweet(self, newTweet, id):
+        metadata = self.tweetMetadata()
+        oldTweet = app.firebaseManager.getTweetByID(id)
+        editDate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
+        valid, msg = app.firebaseManager.editarTweet(id, newTweet, editDate, oldTweet, metadata)
 
