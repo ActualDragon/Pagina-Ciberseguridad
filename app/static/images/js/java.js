@@ -116,6 +116,7 @@ $(window).on("scroll", function() {
 function NuevoTweet(){
     var text = document.getElementById("tweetForm").value;
     idActual=idActual+1;
+    document.getElementById("tweetForm").value = "";
     //Generar el HTML para insertar el tweet en la página
     var post = "<h6 class=\"text-body\" id=\"Post_";
     post += idActual;
