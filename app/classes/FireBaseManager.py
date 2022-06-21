@@ -1,5 +1,4 @@
 import json
-from datetime import datetime  # noqa
 from sys import stderr
 
 import firebase_admin
@@ -11,7 +10,6 @@ from requests.exceptions import HTTPError
 from app.classes import User
 from urlib2 import HTTPError
 from flask import session
-from datetime import datetime
 
 
 class FireBaseManager:
@@ -177,30 +175,28 @@ class FireBaseManager:
             return False
         return followers
 
-    def modificarTweet(self, id, idTweet, nuevoTweet):
-        tweetsRef = (
-            self.firestoreManager.collection("usuarios")
-            .document(id)
-            .collection("tweets")
+    def modificarTweet(self, id, nuevoTweet, date):
+        tweetRef = (
+            self.firestoreManager.collection("tweets").document(id);
         )
-        query = tweetsRef.where("idNum", "==", int(idTweet)).get()
-        field_updates = {"contenido": nuevoTweet, "fecha": ""}
-        for tweet in query:
+        if tweetRef is None:
+            False
+        tweetRef.update("tweet": nuevoTweet, "date": date)
+        return True
+        # query = tweetsRef.where("idNum", "==", int(idTweet)).get()
+        # field_updates = {"contenido": nuevoTweet, "fecha": date}
+        # for tweet in query:
+        #     doc = tweetsRef.document(tweet.id)
+        #     doc.update(field_updates)
+        #     return True
+        # return False
 
-            doc = tweetsRef.document(tweet.id)
-            doc.update(field_updates)
-            return True
-        return False
-
-    def agregaTweet(self, tweet):
-        userID = session.get("id")
-        username = session.get("username")
-        name = session.get("name")
+    def agregaTweet(self, tweet, userInfo, date):
         newValues = {
-            "userID": userID,
-            "name": name,
-            "username": username,
+            "userID": userInfo["userID"],
+            "name": userInfo["name"],
+            "username": userInfo["username"],
             "tweet": tweet,
-            "fecha": datetime.now().strftime("%d/%m/%Y %H:%M:%S"), # dd/mm/YY H:M:S
+            "fecha": date # dd/mm/YY H:M:S
         }
         self.firestoreManager.collection("tweets").document().set(newValues)
