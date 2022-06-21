@@ -32,9 +32,9 @@ class tweet_model:
         tweetDate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
         # Agregamos tweet a DB.
-        try:
-            app.firebaseManager.agregaTweet(tweet, userInfo, tweetDate)
-        except Exception as e:
-            print("ERROR AGREGANDO TWEET\n\n:", str(e), file=stderr)
-            return False
-        return True
+        valida,msg=app.firebaseManager.agregaTweet(tweet, userInfo, tweetDate)
+
+        return valida,msg
+
+
+
