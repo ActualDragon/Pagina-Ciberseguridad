@@ -30,10 +30,10 @@ var Informacion= {
 
 miUsuario = Informacion.usuario;
 numeroTweets = Informacion.numTweets-1;
-number=0; //Variable que determina cuántos tweets se han impreso
-idActual = numeroTweets;
+number=0; //Variable que determina cuántos tweets se han impreso hasta el momento
+idActual = Informacion.numTweets;
 
-//Función que imprime los primeros 10 tweets
+//Llamar a la función que imprime los tweets para imprimir los primeros 10 al cargar la página
 window.onload = function() {
     ImprimeTweets(number);
 }
@@ -115,7 +115,7 @@ $(window).on("scroll", function() {
 //Obtener el texto de un tweet nuevo 
 function NuevoTweet(){
     var text = document.getElementById("tweetForm").value;
-    idActual++;
+    idActual=idActual+1;
     //Generar el HTML para insertar el tweet en la página
     var post = "<h6 class=\"text-body\" id=\"Post_";
     post += idActual;
@@ -138,9 +138,12 @@ function NuevoTweet(){
     post += idActual;
     post += "\">Editar</a></li>";
     post += "</ul></div>";
-    post += "</div></h6><p class=\"p-3 border-bottom border-dark\" style=\"line-height: 1.2;\">";
+    post += "</div></h6><p class=\"p-3 border-bottom border-dark\" style=\"line-height: 1.2;\" id=\"Tweet";
+    post += idActual;
+    post += "\">";
     post += text;
     post += "</p>";
+    console.log(idActual);
     //El contenido se agrega antes de los demás tweets
     const div = document.getElementById('divprint');
     div.insertAdjacentHTML('afterbegin', post);
@@ -216,9 +219,10 @@ function BorraTweet(boton) {
     id += numid;
     text += numid;
     //Eliminar el tweet
+    console.log(id);
+    console.log(text);
     document.getElementById(id).remove();
     document.getElementById(text).remove();
-
     //Post a la base de datos
     //$.post("tweet/Informacion.TweetsRecibidos[numid].id/delete",text);
 }
