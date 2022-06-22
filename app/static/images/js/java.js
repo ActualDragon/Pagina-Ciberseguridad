@@ -1,5 +1,5 @@
 //JSON temporal en lo que queda la base de datos
-var Informacion= { 
+var Informacion= {
     "TweetsRecibidos" : [
         {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
         {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
@@ -90,7 +90,7 @@ function ImprimeTweets(number) {
             // Desactivar el botón si no hay más tweets por cargar
             else {
                 document.getElementById("cargar").disabled = true;
-                document.getElementById("cargar").innerHTML = "Esperando tweets"; 
+                document.getElementById("cargar").innerHTML = "Esperando tweets";
             }
         }
     }
@@ -103,7 +103,7 @@ $(window).on("scroll", function() {
     var scrollHeight = $(document).height();
     //Posición del cursor
     var scrollPos = $(window).height() + $(window).scrollTop();
-    // Disparar si la posición del cursor está 300 pixeles más abajo del principio de la pagina 
+    // Disparar si la posición del cursor está 300 pixeles más abajo del principio de la pagina
     if(((scrollHeight - 300) >= scrollPos) / scrollHeight == 0){
         number = number+10;
         $("#cargar").click();
@@ -112,7 +112,7 @@ $(window).on("scroll", function() {
     }
     });
 
-//Obtener el texto de un tweet nuevo 
+//Obtener el texto de un tweet nuevo
 function NuevoTweet(){
     var text = document.getElementById("tweetForm").value;
     idActual=idActual+1;
@@ -194,7 +194,7 @@ function TweetEditado(boton){
     id += numid;
     //Eliminar el boton "publicar"
     document.getElementById(idOriginal).remove();
-    //Obtener el texto del tweet 
+    //Obtener el texto del tweet
     var text = document.getElementById(id).value;
     //Generar el entrybox
     const paragraph = document.createElement('p');
