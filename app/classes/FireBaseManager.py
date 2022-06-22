@@ -240,3 +240,9 @@ class FireBaseManager:
         if tweet is None:
             return False, "None existing id."
         return tweet.to_dict(), "Success"
+
+    def getAllTweets(self):
+        tweets = self.firestoreManager.collection("tweets").get()
+        if tweets 
+            return False, "None existing id."
+        return tweet.to_dict(), "Success"

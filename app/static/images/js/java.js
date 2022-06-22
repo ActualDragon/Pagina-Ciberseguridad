@@ -1,40 +1,43 @@
 //JSON temporal en lo que queda la base de datos
-var Informacion= {
-    "TweetsRecibidos" : [
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@mileycyrus", "timestamp":"2h", "tweet":"hola", "id":0},
-        {"screenname":"Miley Cyrus", "username":"@hannamontana", "timestamp":"2h", "tweet":"hola final", "id":0}
+var Informacion = {
+    "TweetsRecibidos": [
+        { "screenname": "Miley Cyrus", "username": "@hannamontana", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@hannamontana", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
+        { "screenname": "Miley Cyrus", "username": "@hannamontana", "timestamp": "2h", "tweet": "hola final", "id": 0 }
     ],
-    "numTweets" : 21,
-    "usuario" : "@hannamontana",
-    "nombre" : "Myley Cyrus"
+    "numTweets": 21,
+    "usuario": "@hannamontana",
+    "nombre": "Myley Cyrus"
 }
 
+// Información del programa.
+Informacion = window.informacion
+Informacion = JSON.parse(Informacion)
 miUsuario = Informacion.usuario;
-numeroTweets = Informacion.numTweets-1;
-number=0; //Variable que determina cuántos tweets se han impreso hasta el momento
+numeroTweets = Informacion.numTweets - 1;
+number = 0; //Variable que determina cuántos tweets se han impreso hasta el momento
 idActual = Informacion.numTweets;
 
 //Llamar a la función que imprime los tweets para imprimir los primeros 10 al cargar la página
-window.onload = function() {
+window.onload = function () {
     ImprimeTweets(number);
 }
 
@@ -50,9 +53,9 @@ function ImprimeTweets(number) {
     // testSleep genera un pequeño delay al cargar los tweets nuevos
     const testSleep = async () => {
         await sleep(1000);
-        for(i=number;(i<(number+10));i++) {
+        for (i = number; (i < (number + 10)); i++) {
             // Validar que siga habiendo tweets
-            if (i<=numeroTweets) {
+            if (i <= numeroTweets) {
                 //En post se guarda el HTML para el tweet, agregandole la información de la base de datos
                 var post = "<h6 class=\"text-body\" id=\"Post_";
                 post += i;
@@ -66,7 +69,7 @@ function ImprimeTweets(number) {
                 post += Informacion.TweetsRecibidos[i].timestamp;
                 post += "</span>";
                 //Menu para borrar, editar, etc., tus propios tweets
-                if(Informacion.TweetsRecibidos[i].username==miUsuario){
+                if (Informacion.TweetsRecibidos[i].username == miUsuario) {
                     post += "<div class=\"dropdown\" style=\"display: inline-block\">";
                     post += "<button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenu\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" style=\"color: grey\"></button>";
                     post += "<ul class=\"dropdown-menu\">";
@@ -98,24 +101,24 @@ function ImprimeTweets(number) {
 }
 
 //Infinite Scroll
-$(window).on("scroll", function() {
+$(window).on("scroll", function () {
     //Altura de la página
     var scrollHeight = $(document).height();
     //Posición del cursor
     var scrollPos = $(window).height() + $(window).scrollTop();
     // Disparar si la posición del cursor está 300 pixeles más abajo del principio de la pagina
-    if(((scrollHeight - 300) >= scrollPos) / scrollHeight == 0){
-        number = number+10;
+    if (((scrollHeight - 300) >= scrollPos) / scrollHeight == 0) {
+        number = number + 10;
         $("#cargar").click();
         //Función que carga los siguientes 10 tweets cuando se llega al final de la página
-        $("#cargar").onclick=ImprimeTweets(number);
+        $("#cargar").onclick = ImprimeTweets(number);
     }
-    });
+});
 
 //Obtener el texto de un tweet nuevo
-function NuevoTweet(){
+function NuevoTweet() {
     var text = document.getElementById("tweetForm").value;
-    idActual=idActual+1;
+    idActual = idActual + 1;
     document.getElementById("tweetForm").value = "";
     //Generar el HTML para insertar el tweet en la página
     var post = "<h6 class=\"text-body\" id=\"Post_";
@@ -150,13 +153,13 @@ function NuevoTweet(){
     div.insertAdjacentHTML('afterbegin', post);
 
     //Post a la base de datos
-    $.post("tweet/new",tweet);
+    $.post("tweet/new", tweet);
 }
 
 //Editar un tweet
-function EditaTweet(boton){
+function EditaTweet(boton) {
     //Obtener el id del tweet a editar
-    idOriginal=boton.id;
+    idOriginal = boton.id;
     splitId = idOriginal.split("_");
     numid = splitId[1];
     var id = "Tweet";
@@ -172,7 +175,7 @@ function EditaTweet(boton){
     textarea.setAttribute("class", "form-control form-status border-0 pe-3");
     textarea.setAttribute("type", "text");
     textarea.setAttribute("maxlength", "512");
-    textarea.setAttribute("rows","2");
+    textarea.setAttribute("rows", "2");
     //Insertar el tweet original en el entrybox
     document.getElementById(id).value = text;
     //Generar un boton nuevo
@@ -185,9 +188,9 @@ function EditaTweet(boton){
 }
 
 //Publicar el tweet editado
-function TweetEditado(boton){
+function TweetEditado(boton) {
     //Obtener el id del tweet a editar
-    idOriginal=boton.id;
+    idOriginal = boton.id;
     splitId = idOriginal.split("_");
     numid = splitId[1];
     var id = "Tweet";
@@ -202,17 +205,17 @@ function TweetEditado(boton){
     document.getElementById(id).replaceWith(paragraph);
     //Darle formato al parrafo
     paragraph.setAttribute("id", id);
-    paragraph.setAttribute("class","p-3 border-bottom border-dark");
+    paragraph.setAttribute("class", "p-3 border-bottom border-dark");
     document.getElementById(id).textContent = text;
 
     //Post a la base de datos
-    $.post("tweet/Informacion.TweetsRecibidos[numid].id/update",text);
+    $.post("tweet/Informacion.TweetsRecibidos[numid].id/update", text);
 }
 
 //Borrar un tweet
 function BorraTweet(boton) {
     //Obtener el id del tweet a editar
-    idOriginal=boton.id;
+    idOriginal = boton.id;
     splitId = idOriginal.split("_");
     numid = splitId[1];
     var text = "Tweet"
@@ -225,5 +228,5 @@ function BorraTweet(boton) {
     document.getElementById(id).remove();
     document.getElementById(text).remove();
     //Post a la base de datos
-    $.post("tweet/Informacion.TweetsRecibidos[numid].id/delete",text);
+    $.post("tweet/Informacion.TweetsRecibidos[numid].id/delete", text);
 }

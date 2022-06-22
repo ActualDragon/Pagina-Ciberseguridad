@@ -49,3 +49,23 @@ class tweet_model:
         oldTweet, msg = app.firebaseManager.getTweetByID(id)
 
         valid, msg = app.firebaseManager.eliminarTweet(id, oldTweet, metadata)
+
+    def get_all(self):
+        tweets, msg = app.firebaseManager.getAllTweets()
+
+
+        if tweets is None:
+            return False, "No tweet data"
+        frontFormat = {
+            "TweetsRecibidos": []
+        }
+        # "screenname", "username", "timestamp", "tweet", "id"
+        for tweet in tweets:
+            newTweet = {
+                "screenname": tweet["name"],
+                "username": tweet["username"],
+                "timestanp": tweet["fecha"],
+                "tweet": tweet["tweet"],
+                "id": tweet["id"]
+            }
+            frontFormat.TweetsRecibidos.append(newTweet)

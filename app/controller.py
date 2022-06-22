@@ -1,7 +1,7 @@
 import re
 import sys
 
-from flask import redirect, render_template, request, session, url_for
+from flask import redirect, render_template, request, session, url_for, jsonify
 
 from app import app
 from app.models import login_model, tweet_model
@@ -88,18 +88,27 @@ def login():
     password = data["password"]
     doesUserExist, msg = model.loginUser(user, password)
     if doesUserExist:
-        return redirect(url_for("main"))
+        return redirect(url_for("feed"))
     else:
         redirect(url_for("index"))
         return render_template("index.html", errorMsg="ERROR: " + msg)
 
 
-@app.route("/main")
-def main():
+@app.route("/feed")
+def feed():
+    
     if session.get("id") is None:
         return redirect(url_for("index"))
     else:
-        return render_template("main.html")
+        model=tweet_model.tweet_model()
+        tweets=model.get_all()
+        data={
+            "TweetsRecibidos":tweets,
+            "numTweets":len(tweets),
+            "usuario":session.get("username"),
+            "nombre":session.get("nombre")
+        }
+        return render_template("main.html", jsonify(data))
 
 
 @app.route("/logout")
