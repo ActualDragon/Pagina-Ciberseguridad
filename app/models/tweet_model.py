@@ -1,5 +1,4 @@
 from datetime import datetime
-from sys import stderr
 
 from flask import session
 
@@ -34,14 +33,16 @@ class tweet_model:
         # Agregamos tweet a DB.
         valida, msg = app.firebaseManager.agregaTweet(tweet, userInfo, tweetDate)
 
-        return valida,msg
+        return valida, msg
 
     def modifyTweet(self, newTweet, id):
         metadata = self.tweetMetadata()
         oldTweet, msg = app.firebaseManager.getTweetByID(id)
         editDate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-        valid, msg = app.firebaseManager.editarTweet(id, newTweet, editDate, oldTweet, metadata)
+        valid, msg = app.firebaseManager.editarTweet(
+            id, newTweet, editDate, oldTweet, metadata
+        )
 
     def deleteTweet(self, id):
         metadata = self.tweetMetadata()

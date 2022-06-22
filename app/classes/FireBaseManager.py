@@ -179,11 +179,11 @@ class FireBaseManager:
     def editarTweet(self, id, nuevoTweet, date, oldTweet, metadata):
         print("\n\n\n", oldTweet, "\n\n\n", metadata, "\n\n\n", file=stderr)
         if oldTweet["userID"] != metadata["userID"]:
-           return False, "Unvalid credentials"
+            return False, "Unvalid credentials"
         tweetRef = self.firestoreManager.collection("tweets").document(id)
         if tweetRef is None:
             False, "No existe tweet"
-        args = { "tweet": nuevoTweet, "fecha": date }
+        args = {"tweet": nuevoTweet, "fecha": date}
         tweetRef.update(args)
         return True, "Success"
 

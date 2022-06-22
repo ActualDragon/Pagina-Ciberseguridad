@@ -38,13 +38,11 @@ def registraUsuario():
     confirmaPassword = data.get("confirmaPassword")
     username = data.get("username")
     # Validamos que existan todos los campos
-    if (
-        not nombre or not correo or not password or not confirmaPassword or not username
-    ):
+    if not nombre or not correo or not password or not confirmaPassword or not username:
         redirect(url_for("registrar"))
         return render_template(
             "registro.html", errorMsg="Error: llena todos los campos."
-        ) 
+        )
     # Validamos que contraseña tenga formato correcto
     passwordValida = re.search(regexp, password)
     if not passwordValida:
@@ -79,9 +77,7 @@ def registraUsuario():
         )
     else:
         redirect(url_for("registrar"))
-        return render_template(
-            "registro.html", errorMsg="Error: registrando usuario."
-        ) 
+        return render_template("registro.html", errorMsg="Error: registrando usuario.")
 
 
 @app.route("/login", methods=["POST"])
@@ -117,6 +113,7 @@ def logout():
         session.pop("correo", None)
         return redirect(url_for("index"))
 
+
 @app.route("/tweets/new", methods=["POST"])
 def generarTweet():
     # Instanciamos el objeto de tweet_model.
@@ -139,6 +136,7 @@ def generarTweet():
 
     return redirect(url_for("index"))
 
+
 @app.route("/tweets/<id>/edit", methods=["PATCH"])
 def editarTweet(id):
     model = tweet_model.tweet_model()
@@ -156,6 +154,7 @@ def editarTweet(id):
     model.modifyTweet(data["tweet"], id)
 
     return redirect(url_for("index"))
+
 
 @app.route("/tweets/<id>/delete", methods=["DELETE"])
 def eliminarTweet(id):
