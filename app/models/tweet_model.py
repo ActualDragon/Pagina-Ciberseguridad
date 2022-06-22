@@ -1,5 +1,4 @@
 from datetime import datetime
-from sys import stderr
 
 from flask import session
 
@@ -32,9 +31,21 @@ class tweet_model:
         tweetDate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
         # Agregamos tweet a DB.
-        try:
-            app.firebaseManager.agregaTweet(tweet, userInfo, tweetDate)
-        except Exception as e:
-            print("ERROR AGREGANDO TWEET\n\n:", str(e), file=stderr)
-            return False
-        return True
+        valida, msg = app.firebaseManager.agregaTweet(tweet, userInfo, tweetDate)
+
+        return valida, msg
+
+    def modifyTweet(self, newTweet, id):
+        metadata = self.tweetMetadata()
+        oldTweet, msg = app.firebaseManager.getTweetByID(id)
+        editDate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+        valid, msg = app.firebaseManager.editarTweet(
+            id, newTweet, editDate, oldTweet, metadata
+        )
+
+    def deleteTweet(self, id):
+        metadata = self.tweetMetadata()
+        oldTweet, msg = app.firebaseManager.getTweetByID(id)
+
+        valid, msg = app.firebaseManager.eliminarTweet(id, oldTweet, metadata)

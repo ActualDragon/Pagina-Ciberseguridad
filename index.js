@@ -5,7 +5,7 @@ import { v4 as uuid } from 'uuid';
 import methodOverride from 'method-override';
 import fs from 'fs';
 // This following import is experimental, it might not work in the future.
-import tweetDataJSON from './data.json' assert { type: 'json'}; // Needed when using ESM, import expects JS code by default.
+import tweetDataJSON from './data.json' assert { type: 'json' }; // Needed when using ESM, import expects JS code by default.
 
 // We add __filename to get the current path.
 const __filename = fileURLToPath(import.meta.url);

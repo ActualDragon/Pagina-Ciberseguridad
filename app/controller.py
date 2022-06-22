@@ -4,7 +4,7 @@ import sys
 from flask import redirect, render_template, request, session, url_for
 
 from app import app
-from app.models import login_model
+from app.models import login_model, tweet_model
 from app.views import index_view
 
 
@@ -38,13 +38,11 @@ def registraUsuario():
     confirmaPassword = data.get("confirmaPassword")
     username = data.get("username")
     # Validamos que existan todos los campos
-    if (
-        not nombre or not correo or not password or not confirmaPassword or not username
-    ):  # noqa
+    if not nombre or not correo or not password or not confirmaPassword or not username:
         redirect(url_for("registrar"))
         return render_template(
             "registro.html", errorMsg="Error: llena todos los campos."
-        )  # noqa E501
+        )
     # Validamos que contraseña tenga formato correcto
     passwordValida = re.search(regexp, password)
     if not passwordValida:
@@ -75,13 +73,11 @@ def registraUsuario():
         return render_template(
             "registro.html",
             confirmMsg="Revisa tu correo para confirmarlo"
-            + " y después podrás hacer login.",  # noqa E501
+            + " y después podrás hacer login.",
         )
     else:
         redirect(url_for("registrar"))
-        return render_template(
-            "registro.html", errorMsg="Error: registrando usuario."
-        )  # noqa E501
+        return render_template("registro.html", errorMsg="Error: registrando usuario.")
 
 
 @app.route("/login", methods=["POST"])
@@ -116,3 +112,55 @@ def logout():
         session.pop("nombre", None)
         session.pop("correo", None)
         return redirect(url_for("index"))
+
+
+@app.route("/tweets/new", methods=["POST"])
+def generarTweet():
+    # Instanciamos el objeto de tweet_model.
+    model = tweet_model.tweet_model()
+    # Obtenemos la información enviada por POST
+    # de nuestra form. Se maneja como un diccionario
+    # e.g data["nombre"]
+    data = request.form
+
+    # Obtenemos campos de este diccionario
+    print(data, "\n\n\n", file=sys.stderr)
+
+    # Verificamos contenido del tweet.
+    if data["tweet"] == "" or len(data["tweet"]) > 512:
+        print("Tweet invalido, debe tener entre 1 y 512 caracteres.")
+        return "Error en tweet"
+
+    # Request entry to DB.
+    model.sendTweet(data["tweet"])
+
+    return redirect(url_for("index"))
+
+
+@app.route("/tweets/<id>/edit", methods=["PATCH"])
+def editarTweet(id):
+    model = tweet_model.tweet_model()
+    data = request.form
+
+    # Obtenemos campos de este diccionario
+    print(data, "\n\n\n", file=sys.stderr)
+
+    # Verificamos contenido del tweet.
+    if data["tweet"] == "" or len(data["tweet"]) > 512:
+        print("Tweet invalido, debe tener entre 1 y 512 caracteres.")
+        return "Error en tweet"
+
+    # Request entry to DB.
+    model.modifyTweet(data["tweet"], id)
+
+    return redirect(url_for("index"))
+
+
+@app.route("/tweets/<id>/delete", methods=["DELETE"])
+def eliminarTweet(id):
+    model = tweet_model.tweet_model()
+
+    # Request entry to DB.
+    model.deleteTweet(id)
+
+    return redirect(url_for("index"))

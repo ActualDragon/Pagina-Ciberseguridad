@@ -55,7 +55,7 @@ class FireBaseManager:
                 int(user["expiresIn"]),
             )
             print("USER:\n\n", myUser.correo, file=stderr)
-            return myUser
+            return myUser, "success"
         except HTTPError as e:
             print(
                 "ERROR LOGIN\n\n:",
@@ -86,9 +86,13 @@ class FireBaseManager:
             )
             print("USER:\n\n", myUser.correo, file=stderr)
             return myUser
-        except Exception as e:
-            print("ERROR REGISTRO\n\n:", str(e), file=stderr)
-            return False
+        except HTTPError as e:
+            print(
+                "ERROR REGISTRO\n\n:",
+                json.loads(e.args[1])["error"]["message"],
+                file=stderr,
+            )
+            return False, json.loads(e.args[1])["error"]["message"]
 
     def getUsuarioByID(self, idUsuario):
         usuariosRef = self.firestoreManager.collection("usuarios")
@@ -172,27 +176,36 @@ class FireBaseManager:
             return False
         return followers
 
-    def modificarTweet(self, id, nuevoTweet, date):
+    def editarTweet(self, id, nuevoTweet, date, oldTweet, metadata):
+        print("\n\n\n", oldTweet, "\n\n\n", metadata, "\n\n\n", file=stderr)
+        if oldTweet["userID"] != metadata["userID"]:
+            return False, "Unvalid credentials"
         tweetRef = self.firestoreManager.collection("tweets").document(id)
         if tweetRef is None:
-            False
-        # tweetRef.update("tweet": nuevoTweet, "date": date) ## Invalid syntax
-        return True
-        # query = tweetsRef.where("idNum", "==", int(idTweet)).get()
-        # field_updates = {"contenido": nuevoTweet, "fecha": date}
-        # for tweet in query:
-        #     doc = tweetsRef.document(tweet.id)
-        #     doc.update(field_updates)
-        #     return True
-        # return False
+            False, "No existe tweet"
+        args = {"tweet": nuevoTweet, "fecha": date}
+        tweetRef.update(args)
+        return True, "Success"
 
-    def eliminarTweet(self, id):
+    def eliminarTweet(self, id, oldTweet, metadata):
+        print("\n\n\n", oldTweet, "\n\n\n", metadata, "\n\n\n", file=stderr)
+        if oldTweet is None:
+            print("User data is None.")
+            return False, "No data available for delete."
+        if oldTweet["userID"] != metadata["userID"]:
+            print("Tweet not available credentials.")
+            return False, "Unvalid credentials"
         try:
             self.firestoreManager.collection("tweets").document(id).delete()
-            return True
-        except Exception as e:
-            print("ERROR DELETE TWEET\n\n:", str(e), file=stderr)
-            return False
+            print("Tweet deleted.")
+            return True, "Success"
+        except HTTPError as e:
+            print(
+                "ERROR EN DELETE\n\n:",
+                json.loads(e.args[1])["error"]["message"],
+                file=stderr,
+            )
+            return False, json.loads(e.args[1])["error"]["message"]
 
     def agregaTweet(self, tweet, userInfo, date):
         newValues = {
@@ -202,7 +215,28 @@ class FireBaseManager:
             "tweet": tweet,
             "fecha": date,  # dd/mm/YY H:M:S
         }
-        self.firestoreManager.collection("tweets").document().set(newValues)
+        try:
+            self.firestoreManager.collection("tweets").document().set(newValues)
+            return True, "Success"
+        except HTTPError as e:
+            print(
+                "ERROR AGREGAR TWEET:\n\n",
+                json.loads(e.args[1])["error"]["message"],
+                file=stderr,
+            )
+            return False, json.loads(e.args[1])["error"]["message"]
 
     def sendTweets(self):
-        return self.firestoreManager.collection("tweets")
+        tweetList = []
+        tweets = self.firestoreManager.collection("tweets").get()
+        for tweet in tweets:
+            tweetDict = tweet.to_dict()
+            tweetList.append(tweetDict)
+        return tweetList
+
+    def getTweetByID(self, id):
+        # Esto podría regresar un cursor (en nuestro caso no), puede ser el get().
+        tweet = self.firestoreManager.collection("tweets").document(id).get()
+        if tweet is None:
+            return False, "None existing id."
+        return tweet.to_dict(), "Success"
