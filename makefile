@@ -8,7 +8,9 @@ env:	## generar ambiente de desarrollo
 	python -m pip install -r requirements.txt
 
 build:  ## build images
+	git stash -u
 	docker-compose -f containers/prod/compose.yml build
+	git stash pop || true
 
 dev:   ## start development app
 	docker-compose -f containers/dev/compose.yml up -d
