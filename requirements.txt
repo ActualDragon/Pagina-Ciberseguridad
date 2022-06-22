@@ -1,7 +1,5 @@
 Flask>=2.0.2
 flask-session
-numpy
-pandas
 kaleido
 requests
 PyJWT
