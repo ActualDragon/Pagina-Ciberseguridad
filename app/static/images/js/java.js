@@ -150,7 +150,7 @@ function NuevoTweet(){
     div.insertAdjacentHTML('afterbegin', post);
 
     //Post a la base de datos
-    //$.post("tweet/new",tweet);
+    $.post("tweet/new",tweet);
 }
 
 //Editar un tweet
@@ -206,7 +206,7 @@ function TweetEditado(boton){
     document.getElementById(id).textContent = text;
 
     //Post a la base de datos
-    //$.post("tweet/Informacion.TweetsRecibidos[numid].id/update",text);
+    $.post("tweet/Informacion.TweetsRecibidos[numid].id/update",text);
 }
 
 //Borrar un tweet
@@ -225,5 +225,5 @@ function BorraTweet(boton) {
     document.getElementById(id).remove();
     document.getElementById(text).remove();
     //Post a la base de datos
-    //$.post("tweet/Informacion.TweetsRecibidos[numid].id/delete",text);
+    $.post("tweet/Informacion.TweetsRecibidos[numid].id/delete",text);
 }
