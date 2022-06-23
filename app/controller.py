@@ -142,6 +142,7 @@ def generarTweet():
     data = request.form
 
     # Obtenemos campos de este diccionario
+    print("SUBIENDO TWEETS\n\n\n", file=sys.stderr)
     print(data, "\n\n\n", file=sys.stderr)
 
     # Verificamos contenido del tweet.
@@ -152,7 +153,7 @@ def generarTweet():
     # Request entry to DB.
     model.sendTweet(data["tweet"])
 
-    return redirect(url_for("index"))
+    return redirect(url_for("feed"))
 
 
 @app.route("/tweets/<id>/edit", methods=["PATCH"])

@@ -10,7 +10,7 @@ class tweet_model:
         metadata = {
             "userID": session.get("id"),
             "username": session.get("username"),
-            "name": session.get("name"),
+            "name": session.get("nombre"),
         }
         print(metadata["userID"])
         if metadata["userID"] is None:

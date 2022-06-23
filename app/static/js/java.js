@@ -90,6 +90,7 @@ function NuevoTweet() {
     idActual = idActual + 1;
     document.getElementById("tweetForm").value = "";
     //Generar el HTML para insertar el tweet en la página
+
     var post = "<h6 class=\"text-body\" id=\"Post_";
     post += idActual;
     post += "\"><div class=\"p-3 border-bottom\">";
@@ -120,9 +121,17 @@ function NuevoTweet() {
     //El contenido se agrega antes de los demás tweets
     const div = document.getElementById('divprint');
     div.insertAdjacentHTML('afterbegin', post);
-
+    datos = {
+        "tweet": text
+    }
     //Post a la base de datos
-    $.post("tweet/new", tweet);
+    $.ajax({
+        url: "/tweets/new",
+        type: "POST",
+        dataType: "json",
+        data: datos
+    })
+
 }
 
 //Editar un tweet
