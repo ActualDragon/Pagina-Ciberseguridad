@@ -56,12 +56,12 @@ class tweet_model:
         if not tweets:
             print("Error no tweet data")
             return False, "No tweet data"
-        tweetsRecibidos=[]
+        tweetsRecibidos = []
         count = 0
 
         # "screenname", "username", "timestamp", "tweet", "id"
         for tweet in tweets:
-            print(f'{tweet.to_dict}')
+            print(f"{tweet.to_dict}")
             _id = tweet.id
             tweetDict = tweet.to_dict()
             newTweet = {
@@ -69,8 +69,8 @@ class tweet_model:
                 "username": tweetDict["username"],
                 "timestamp": tweetDict["fecha"],
                 "tweet": tweetDict["tweet"],
-                "id": _id
+                "id": _id,
             }
-            print("\nSending: ", tweetDict["tweet"] , " => " , count)
+            print("\nSending: ", tweetDict["tweet"], " => ", count)
             tweetsRecibidos.append(newTweet)
-        return(tweetsRecibidos)
+        return tweetsRecibidos

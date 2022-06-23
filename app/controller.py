@@ -1,12 +1,13 @@
+import json
 import re
 import sys
 
-from flask import redirect, render_template, request, session, url_for, jsonify
+from flask import jsonify, redirect, render_template, request, session, url_for
 
 from app import app
 from app.models import login_model, tweet_model
 from app.views import index_view
-import json
+
 
 @app.route("/")
 def index():
@@ -19,9 +20,11 @@ def index():
 def registrar():
     return render_template("registro.html")
 
+
 @app.route("/hola")
 def hola():
     return render_template("registro.html")
+
 
 @app.route("/registraUsuario", methods=["POST"])
 def registraUsuario():
@@ -107,12 +110,12 @@ def feed():
         print("Error session ID")
         return redirect(url_for("index"))
     else:
-        tweets=model.get_all()
+        tweets = model.get_all()
         data = {
             "TweetsRecibidos": tweets,
             "numTweets": len(tweets),
             "usuario": meta["username"],
-            "nombre": meta["name"]
+            "nombre": meta["name"],
         }
         print("\n\n\n\nAhí van los tweets:\n")
         print(data)
@@ -152,9 +155,7 @@ def generarTweet():
 
     # Request entry to DB.
     model.sendTweet(data["tweet"])
-    response={
-        "success":True
-    }
+    response = {"success": True}
     return jsonify(response)
 
 
