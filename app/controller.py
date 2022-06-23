@@ -96,18 +96,24 @@ def login():
 
 @app.route("/feed")
 def feed():
-    
-    if session.get("id") is None:
+    model = tweet_model.tweet_model()
+    meta = model.tweetMetadata()
+
+    print("Into feed with id: " + meta["userID"])
+    if meta["userID"] is None:
+        print("Error session ID")
         return redirect(url_for("index"))
     else:
-        model=tweet_model.tweet_model()
         tweets=model.get_all()
-        data={
-            "TweetsRecibidos":tweets,
-            "numTweets":len(tweets),
-            "usuario":session.get("username"),
-            "nombre":session.get("nombre")
+        data = {
+            "TweetsRecibidos": tweets,
+            "numTweets": len(tweets),
+            "usuario": meta["username"],
+            "nombre": meta["name"]
         }
+        print("\n\n\n\nAhí van los tweets:\n")
+        print(jsonify(data))
+        print("Eso fue todo.\n\n\n")
         return render_template("main.html", jsonify(data))
 
 

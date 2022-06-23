@@ -53,19 +53,26 @@ class tweet_model:
     def get_all(self):
         tweets, msg = app.firebaseManager.getAllTweets()
 
-
-        if tweets is None:
+        if tweets is False:
+            print("Error no tweet data")
             return False, "No tweet data"
         frontFormat = {
             "TweetsRecibidos": []
         }
+        count = 0
+
         # "screenname", "username", "timestamp", "tweet", "id"
         for tweet in tweets:
+            print(f'{tweet.id}')
+            _id = tweet.id
+            tweet = tweet.to_dict()
             newTweet = {
                 "screenname": tweet["name"],
                 "username": tweet["username"],
                 "timestanp": tweet["fecha"],
                 "tweet": tweet["tweet"],
-                "id": tweet["id"]
+                "id": _id
             }
+            print("\nSending: " + (tweet["tweet"] + " (" + count + ")"))
             frontFormat.TweetsRecibidos.append(newTweet)
+        return(frontFormat)

@@ -242,7 +242,9 @@ class FireBaseManager:
         return tweet.to_dict(), "Success"
 
     def getAllTweets(self):
-        tweets = self.firestoreManager.collection("tweets").get()
-        if tweets 
-            return False, "None existing id."
-        return tweet.to_dict(), "Success"
+        tweets = self.firestoreManager.collection("tweets").stream()
+        if tweets is None:
+            print("Error nothing to show")
+            return False, "No tweets to show."
+        print("Get all tweets from DB success.")
+        return tweets, "Success"
