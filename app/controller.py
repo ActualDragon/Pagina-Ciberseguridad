@@ -19,6 +19,9 @@ def index():
 def registrar():
     return render_template("registro.html")
 
+@app.route("/hola")
+def hola():
+    return render_template("registro.html")
 
 @app.route("/registraUsuario", methods=["POST"])
 def registraUsuario():
