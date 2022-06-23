@@ -1,12 +1,12 @@
 import re
 import sys
 
-from flask import redirect, render_template, request, session, url_for, jsonify
+from flask import redirect, render_template, request, session, url_for
 
 from app import app
 from app.models import login_model, tweet_model
 from app.views import index_view
-
+import json
 
 @app.route("/")
 def index():
@@ -112,9 +112,9 @@ def feed():
             "nombre": meta["name"]
         }
         print("\n\n\n\nAhí van los tweets:\n")
-        print(jsonify(data))
+        print(data)
         print("Eso fue todo.\n\n\n")
-        return render_template("main.html", jsonify(data))
+        return render_template("feed.html", informacion=json.dumps(data))
 
 
 @app.route("/logout")

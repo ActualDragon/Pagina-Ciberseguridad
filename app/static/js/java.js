@@ -1,36 +1,5 @@
-//JSON temporal en lo que queda la base de datos
-var Informacion = {
-    "TweetsRecibidos": [
-        { "screenname": "Miley Cyrus", "username": "@hannamontana", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@hannamontana", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@mileycyrus", "timestamp": "2h", "tweet": "hola", "id": 0 },
-        { "screenname": "Miley Cyrus", "username": "@hannamontana", "timestamp": "2h", "tweet": "hola final", "id": 0 }
-    ],
-    "numTweets": 21,
-    "usuario": "@hannamontana",
-    "nombre": "Myley Cyrus"
-}
-
 // Información del programa.
-Informacion = window.informacion
-Informacion = JSON.parse(Informacion)
+Informacion = window.informacion;
 miUsuario = Informacion.usuario;
 numeroTweets = Informacion.numTweets - 1;
 number = 0; //Variable que determina cuántos tweets se han impreso hasta el momento

@@ -243,7 +243,7 @@ class FireBaseManager:
 
     def getAllTweets(self):
         tweets = self.firestoreManager.collection("tweets").stream()
-        if tweets is None:
+        if not tweets:
             print("Error nothing to show")
             return False, "No tweets to show."
         print("Get all tweets from DB success.")
