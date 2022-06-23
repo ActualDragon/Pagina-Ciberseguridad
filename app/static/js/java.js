@@ -32,7 +32,7 @@ function ImprimeTweets(number) {
                 post += "<img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp\" class=\"rounded-circle\" height=\"50\" loading=\"lazy\"/>  ";
                 post += Informacion.TweetsRecibidos[i].screenname;
                 post += "<div style=\"display:inline\" class=\"small text-muted font-weight-normal\"> • </div>";
-                post += "<span class=\"small text-muted font-weight-normal\">";
+                post += "<span class=\"small text-muted font-weight-normal\">@";
                 post += Informacion.TweetsRecibidos[i].username;
                 post += "</span><span class=\"small text-muted font-weight-normal\">  ";
                 post += Informacion.TweetsRecibidos[i].timestamp;
@@ -97,7 +97,7 @@ function NuevoTweet() {
     post += "<img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp\" class=\"rounded-circle\" height=\"50\" loading=\"lazy\"/>  ";
     post += Informacion.nombre;
     post += "<div style=\"display:inline\" class=\"small text-muted font-weight-normal\"> • </div>";
-    post += "<span class=\"small text-muted font-weight-normal\">";
+    post += "<span class=\"small text-muted font-weight-normal\">@";
     post += Informacion.usuario;
     post += "</span><span class=\"small text-muted font-weight-normal\">  ";
     post += " just now";
@@ -189,9 +189,20 @@ function TweetEditado(boton) {
     paragraph.setAttribute("id", id);
     paragraph.setAttribute("class", "p-3 border-bottom border-dark");
     document.getElementById(id).textContent = text;
-
+    datos = {
+        "tweet": text
+    }
     //Post a la base de datos
-    $.post("tweet/Informacion.TweetsRecibidos[numid].id/update", text);
+    $.ajax({
+        url: "/tweets/" + Informacion.TweetsRecibidos[numid].id + "/edit",
+        type: "POST",
+        dataType: "json",
+        data: datos
+    }).done(function (data) {
+        if (data["success"]) {
+            document.location.reload()
+        }
+    })
 }
 
 //Borrar un tweet
@@ -210,5 +221,14 @@ function BorraTweet(boton) {
     document.getElementById(id).remove();
     document.getElementById(text).remove();
     //Post a la base de datos
-    $.post("tweet/Informacion.TweetsRecibidos[numid].id/delete", text);
+    $.ajax({
+        url: "/tweets/" + Informacion.TweetsRecibidos[numid].id + "/delete",
+        type: "POST",
+        dataType: "json",
+        data: idOriginal
+    }).done(function (data) {
+        if (data["success"]) {
+            document.location.reload()
+        }
+    })
 }

@@ -158,7 +158,7 @@ def generarTweet():
     return jsonify(response)
 
 
-@app.route("/tweets/<id>/edit", methods=["PATCH"])
+@app.route("/tweets/<id>/edit", methods=["POST"])
 def editarTweet(id):
     model = tweet_model.tweet_model()
     data = request.form
@@ -177,7 +177,7 @@ def editarTweet(id):
     return redirect(url_for("index"))
 
 
-@app.route("/tweets/<id>/delete", methods=["DELETE"])
+@app.route("/tweets/<id>/delete", methods=["POST"])
 def eliminarTweet(id):
     model = tweet_model.tweet_model()
 
