@@ -1,7 +1,7 @@
 import re
 import sys
 
-from flask import redirect, render_template, request, session, url_for
+from flask import redirect, render_template, request, session, url_for, jsonify
 
 from app import app
 from app.models import login_model, tweet_model
@@ -152,8 +152,10 @@ def generarTweet():
 
     # Request entry to DB.
     model.sendTweet(data["tweet"])
-
-    return redirect(url_for("feed"))
+    response={
+        "success":True
+    }
+    return jsonify(response)
 
 
 @app.route("/tweets/<id>/edit", methods=["PATCH"])

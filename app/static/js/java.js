@@ -130,6 +130,10 @@ function NuevoTweet() {
         type: "POST",
         dataType: "json",
         data: datos
+    }).done(function (data) {
+        if (data["success"]) {
+            document.location.reload()
+        }
     })
 
 }
