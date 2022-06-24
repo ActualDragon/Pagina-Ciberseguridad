@@ -1,4 +1,3 @@
-import json
 import re
 import sys
 
@@ -94,17 +93,18 @@ def login():
     password = data["password"]
     doesUserExist, msg = model.loginUser(user, password)
     if doesUserExist:
-        return redirect(url_for("feed"))
+        return render_template("feed.html")
     else:
         redirect(url_for("index"))
         return render_template("index.html", errorMsg="ERROR: " + msg)
 
 
-@app.route("/feed")
-def feed():
+@app.route("/tweets/fetch/<totalTweets>", methods=["POST"])
+def feed(totalTweets):
     model = tweet_model.tweet_model()
     meta = model.tweetMetadata()
-
+    tweetsToFetch=totalTweets
+    print(tweetsToFetch)
     print("Into feed with id: " + meta["userID"])
     if meta["userID"] is None:
         print("Error session ID")
@@ -120,7 +120,7 @@ def feed():
         print("\n\n\n\nAhí van los tweets:\n")
         print(data)
         print("Eso fue todo.\n\n\n")
-        return render_template("feed.html", informacion=json.dumps(data))
+        return jsonify(data)
 
 
 @app.route("/logout")
