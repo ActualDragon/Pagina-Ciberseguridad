@@ -65,9 +65,9 @@ class tweet_model:
             _id = tweet.id
             tweetDict = tweet.to_dict()
             if "tweet" in tweetDict:
-                text=tweetDict["tweet"]
+                text = tweetDict["tweet"]
             else:
-                text="Tweet vacío"
+                text = "Tweet vacío"
             newTweet = {
                 "screenname": tweetDict["name"],
                 "username": tweetDict["username"],

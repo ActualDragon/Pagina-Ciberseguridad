@@ -103,7 +103,7 @@ def login():
 def feed(totalTweets):
     model = tweet_model.tweet_model()
     meta = model.tweetMetadata()
-    tweetsToFetch=totalTweets
+    tweetsToFetch = totalTweets
     print(tweetsToFetch)
     print("Into feed with id: " + meta["userID"])
     if meta["userID"] is None:

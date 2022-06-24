@@ -3,7 +3,7 @@ window.onload=function(){
         url: "/tweets/fetch/1",
         type: "POST",
         dataType: "JSON",
-    
+
     }).done(function(data){
         console.log(data);
         getTweets(data);
