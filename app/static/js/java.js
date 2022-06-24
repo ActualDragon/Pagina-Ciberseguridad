@@ -1,14 +1,31 @@
-// Información del programa.
-Informacion = window.informacion;
-miUsuario = Informacion.usuario;
-numeroTweets = Informacion.numTweets - 1;
-number = 0; //Variable que determina cuántos tweets se han impreso hasta el momento
-idActual = Informacion.numTweets;
-
-//Llamar a la función que imprime los tweets para imprimir los primeros 10 al cargar la página
-window.onload = function () {
+window.onload=function(){
+    $.ajax({
+        url: "/tweets/fetch/1",
+        type: "POST",
+        dataType: "JSON",
+    
+    }).done(function(data){
+        console.log(data);
+        getTweets(data);
+    })
+};
+var Informacion=""
+var miUsuario=""
+var numeroTweets=0
+var number=0
+var idActual=0
+function getTweets(data){
+    // Información del programa.
+    Informacion = data;
+    console.log(data)
+    miUsuario = Informacion.usuario;
+    numeroTweets = Informacion.numTweets - 1;
+    number = 0; //Variable que determina cuántos tweets se han impreso hasta el momento
+    idActual = Informacion.numTweets;
     ImprimeTweets(number);
 }
+
+
 
 //Función que permite tener un delay a la hora de cargar los tweets nuevos
 const sleep = async (milliseconds) => {
@@ -80,7 +97,7 @@ $(window).on("scroll", function () {
         number = number + 10;
         $("#cargar").click();
         //Función que carga los siguientes 10 tweets cuando se llega al final de la página
-        $("#cargar").onclick = ImprimeTweets(number);
+        $("#cargar").onclick=ImprimeTweets(number);
     }
 });
 
