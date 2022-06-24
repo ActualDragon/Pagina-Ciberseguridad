@@ -21,7 +21,13 @@ class tweet_model:
         if tweet["tweet"]=="":
             tweet["tweet"]="Empty tweet."
         print("\n\n",tweet["tweet"], ": ", html.escape(tweet["tweet"]), "\n\n", file=stderr)
-        tweet["tweet"]=html.escape(tweet["tweet"])
+        #Veamos si ya está escapado el string
+        #Si se puede hacer el inverso del escape
+        #Significa que ya escapó, y no hay que hacer nada
+        #Si están iguales, significa que no se ha escapado.
+        test=html.unescape(tweet["tweet"])
+        if test==tweet["tweet"]:
+            tweet["tweet"]=html.escape(tweet["tweet"])
         return tweet
 
     def tweetMetadata(self):
