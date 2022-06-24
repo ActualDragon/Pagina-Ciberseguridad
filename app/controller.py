@@ -93,14 +93,18 @@ def login():
     password = data["password"]
     doesUserExist, msg = model.loginUser(user, password)
     if doesUserExist:
-        return render_template("feed.html")
+
+        return redirect(url_for("feed"))
     else:
         redirect(url_for("index"))
         return render_template("index.html", errorMsg="ERROR: " + msg)
-
+        
+@app.route("/feed")
+def feed():
+    return render_template("feed.html")
 
 @app.route("/tweets/fetch/<totalTweets>", methods=["POST"])
-def feed(totalTweets):
+def fetchFeed(totalTweets):
     model = tweet_model.tweet_model()
     meta = model.tweetMetadata()
     tweetsToFetch = totalTweets
