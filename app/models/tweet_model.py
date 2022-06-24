@@ -1,11 +1,29 @@
 from datetime import datetime
+from sys import stderr
 
 from flask import session
 
 from app import app
+import html
 
 
 class tweet_model:
+
+    def sanitizeTweet(self, tweet):
+        tweet=tweet.to_dict()
+        isThereTweet=False
+        for key, value in tweet.items() :
+            if key=="tweet":
+                isThereTweet=True
+        if not isThereTweet:
+            print("\n\nNO HAY TWEET :(\n\n", file=stderr)
+            tweet["tweet"]="Empty tweet."
+        if tweet["tweet"]=="":
+            tweet["tweet"]="Empty tweet."
+        print("\n\n",tweet["tweet"], ": ", html.escape(tweet["tweet"]), "\n\n", file=stderr)
+        tweet["tweet"]=html.escape(tweet["tweet"])
+        return tweet
+
     def tweetMetadata(self):
         metadata = {
             "userID": session.get("id"),
@@ -29,7 +47,7 @@ class tweet_model:
 
         # Obtenemos el momento en que se generó el tweet.
         tweetDate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-
+        tweet=html.escape(tweet)
         # Agregamos tweet a DB.
         valida, msg = app.firebaseManager.agregaTweet(tweet, userInfo, tweetDate)
 
@@ -39,7 +57,7 @@ class tweet_model:
         metadata = self.tweetMetadata()
         oldTweet, msg = app.firebaseManager.getTweetByID(id)
         editDate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-
+        newTweet=html.escape(newTweet)
         valid, msg = app.firebaseManager.editarTweet(
             id, newTweet, editDate, oldTweet, metadata
         )
@@ -61,18 +79,14 @@ class tweet_model:
 
         # "screenname", "username", "timestamp", "tweet", "id"
         for tweet in tweets:
-            print(f"{tweet.to_dict()}")
+            
             _id = tweet.id
-            tweetDict = tweet.to_dict()
-            if "tweet" in tweetDict:
-                text = tweetDict["tweet"]
-            else:
-                text = "Tweet vacío"
+            tweetDict = self.sanitizeTweet(tweet)
             newTweet = {
                 "screenname": tweetDict["name"],
                 "username": tweetDict["username"],
                 "timestamp": tweetDict["fecha"],
-                "tweet": text,
+                "tweet": tweetDict["tweet"],
                 "id": _id,
             }
             print("\nSending: ", tweetDict["tweet"], " => ", count)
