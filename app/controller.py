@@ -98,7 +98,7 @@ def login():
     else:
         redirect(url_for("index"))
         return render_template("index.html", errorMsg="ERROR: " + msg)
-        
+
 @app.route("/feed")
 def feed():
     return render_template("feed.html")
@@ -179,7 +179,7 @@ def editarTweet(id):
     # Request entry to DB.
     model.modifyTweet(data["tweet"], id)
 
-    return redirect(url_for("index"))
+    return jsonify({"success":True})
 
 
 @app.route("/tweets/<id>/delete", methods=["POST"])
@@ -189,4 +189,4 @@ def eliminarTweet(id):
     # Request entry to DB.
     model.deleteTweet(id)
 
-    return redirect(url_for("index"))
+    return jsonify({"success":True})
