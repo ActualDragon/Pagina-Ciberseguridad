@@ -61,14 +61,18 @@ class tweet_model:
 
         # "screenname", "username", "timestamp", "tweet", "id"
         for tweet in tweets:
-            print(f"{tweet.to_dict}")
+            print(f"{tweet.to_dict()}")
             _id = tweet.id
             tweetDict = tweet.to_dict()
+            if "tweet" in tweetDict:
+                text=tweetDict["tweet"]
+            else:
+                text="Tweet vacío"
             newTweet = {
                 "screenname": tweetDict["name"],
                 "username": tweetDict["username"],
                 "timestamp": tweetDict["fecha"],
-                "tweet": tweetDict["tweet"],
+                "tweet": text,
                 "id": _id,
             }
             print("\nSending: ", tweetDict["tweet"], " => ", count)
